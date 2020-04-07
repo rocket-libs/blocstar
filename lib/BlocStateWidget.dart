@@ -5,7 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'BlocBase.dart';
 import 'BlocProvider.dart';
 
-abstract class BlocStateWidget<TState extends StatefulWidget, TBloc extends BlocBase,
+abstract class BlocStateWidget<
+    TState extends StatefulWidget,
+    TBloc extends BlocBase,
     TBlocModel extends BlocModelBase> extends State<TState> {
   TBloc _privateBloc;
   TBlocModel model;
@@ -50,9 +52,9 @@ abstract class BlocStateWidget<TState extends StatefulWidget, TBloc extends Bloc
       return onNullModel();
     } else if (model.actionState.busy) {
       return onBusy();
-    }else if (model.actionState.lastActionTimedOut){
+    } else if (model.actionState.lastActionTimedOut) {
       return onTimeOut();
-    }else if (model.actionState.errorOccuredOnLastAction) {
+    } else if (model.actionState.errorOccuredOnLastAction) {
       return onError();
     } else {
       return onSuccess();

@@ -13,3 +13,6 @@
 
 ## [0.0.8] - TODO: Add release date.
 * Gave timeout result a higher precedence than general exceptions
+
+## [0.0.9] - Convenience.
+* Convenience method for running async directly from  bloc
