@@ -1,8 +1,7 @@
 name: blocstar
 description: Bloc based nano framework.
 version: 0.0.1
-author: Rocket Libraries
-homepage:
+homepage: https://github.com/rocket-libs/blocstar
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

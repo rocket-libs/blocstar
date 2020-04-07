@@ -1,19 +1,20 @@
-class ActionState{
+class ActionState {
   bool _busy;
   bool _lastActionTimedOut;
   Exception _lastActionException;
   final Function(ActionState) onActionStateChanged;
 
-  ActionState(this._busy, this._lastActionTimedOut, this._lastActionException, this.onActionStateChanged);
+  ActionState(this._busy, this._lastActionTimedOut, this._lastActionException,
+      this.onActionStateChanged);
 
-  set busy(bool value){
+  set busy(bool value) {
     _busy = value;
     onActionStateChanged(this);
   }
 
   bool get busy => _busy;
 
-  set lastActionTimedOut(bool value){
+  set lastActionTimedOut(bool value) {
     _lastActionTimedOut = value;
     onActionStateChanged(this);
   }
@@ -22,13 +23,10 @@ class ActionState{
 
   bool get errorOccuredOnLastAction => lastActionException != null;
 
-  set lastActionException(Exception exception){
+  set lastActionException(Exception exception) {
     _lastActionException = exception;
     onActionStateChanged(this);
   }
 
   Exception get lastActionException => _lastActionException;
-
-  
-
 }

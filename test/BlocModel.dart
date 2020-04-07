@@ -1,9 +1,6 @@
 import 'package:blocstar/BlocModelBase.dart';
 
-class BlocModel extends BlocModelBase<BlocModel>{
+class BlocModel extends BlocModelBase<BlocModel> {
   @override
-  BlocModel merge() {
-    
-  }
-
+  BlocModel merge() {}
 }

@@ -2,32 +2,32 @@ import 'dart:async';
 
 import 'package:blocstar/ActionState.dart';
 
-abstract class BlocBase<TBlocModel>{
+abstract class BlocBase<TBlocModel> {
   final _controller = StreamController<TBlocModel>();
   TBlocModel currentModel;
 
-  
- Stream<TBlocModel> get stream => _controller.stream;
-  
+  Stream<TBlocModel> get stream => _controller.stream;
+
   Future initializeAsync();
 
-  onAppStateChangedCallback(ActionState actionState){
-    sinkDefault();  
+  onAppStateChangedCallback(ActionState actionState) {
+    sinkDefault();
   }
 
-  sinkDefault(){
+  sinkDefault() {
     sink(currentModel);
   }
-  sink(TBlocModel model){
-    if(isClosed == false){
+
+  sink(TBlocModel model) {
+    if (isClosed == false) {
       currentModel = model;
       _controller.sink.add(model);
-    }else{
+    } else {
       throw new Exception("Cannot sink into a closed controller");
     }
   }
 
-  bool get modelInitialized{
+  bool get modelInitialized {
     return currentModel != null;
   }
 
@@ -35,7 +35,5 @@ abstract class BlocBase<TBlocModel>{
     _controller.close();
   }
 
-  
   bool get isClosed => _controller.isClosed;
-
 }

@@ -1,9 +1,8 @@
 import 'package:blocstar/ActionState.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void main(){
-  
-  test("busy state triggers ActionState",(){
+void main() {
+  test("busy state triggers ActionState", () {
     var busy = false;
     final actionState = new ActionState(false, false, null, (actionState) {
       busy = actionState.busy;
@@ -12,7 +11,7 @@ void main(){
     expect(busy, true);
   });
 
-  test("last action timeout triggers ActionState",(){
+  test("last action timeout triggers ActionState", () {
     var lastActionTimeOut = false;
     final actionState = new ActionState(false, false, null, (actionState) {
       lastActionTimeOut = actionState.lastActionTimedOut;
@@ -21,7 +20,7 @@ void main(){
     expect(lastActionTimeOut, true);
   });
 
-  test("last action exception triggers ActionState",(){
+  test("last action exception triggers ActionState", () {
     final exceptionMessage = "blah";
     Exception lastException;
     final actionState = new ActionState(false, false, null, (actionState) {
