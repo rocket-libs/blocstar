@@ -6,7 +6,7 @@ import 'ActionState.dart';
 abstract class BlocModelBase<TBlocModel> implements Mergeable<TBlocModel> {
   ActionState actionState;
 
-  BlocModelBase({Function(ActionState) onAppStateChanged}) {
+  BlocModelBase(Function(ActionState) onAppStateChanged) {
     actionState = new ActionState(false, false, null, onAppStateChanged);
   }
 

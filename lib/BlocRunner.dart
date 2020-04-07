@@ -22,7 +22,6 @@ class BlocRunner {
       return null;
     } catch (e) {
       actionState.lastActionException = e;
-      throw e;
     } finally {
       actionState.busy = false;
     }
