@@ -16,3 +16,9 @@
 
 ## [0.0.9] - Convenience.
 * Convenience method for running async directly from  bloc
+
+## [0.0.11] - Refactor.
+* Renamed method 'bootstrapper' to more descriptive 'bind' in BlocWidgetState
+
+## [0.0.11] - Refactor.
+* Added a working example to demonstrate how to use the code

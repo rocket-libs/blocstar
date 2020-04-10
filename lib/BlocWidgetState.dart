@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'BlocBase.dart';
 import 'BlocProvider.dart';
 
-abstract class BlocStateWidget<
+abstract class BlocWidgetState<
     TState extends StatefulWidget,
     TBloc extends BlocBase,
     TBlocModel extends BlocModelBase> extends State<TState> {
@@ -37,9 +37,9 @@ abstract class BlocStateWidget<
     }
   }
 
-  Widget bootstrapper({@required Widget Function() fnContentBuilder}) {
+  Widget bind({@required Widget Function() fnScreenGetter}) {
     return _bootstrapper(
-        fnNoData: fnContentBuilder, fnHasData: (_) => fnContentBuilder());
+        fnNoData: fnScreenGetter, fnHasData: (_) => fnScreenGetter());
   }
 
   Widget getCurrentWidget(
