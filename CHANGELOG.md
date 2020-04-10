@@ -20,5 +20,5 @@
 ## [0.0.11] - Refactor.
 * Renamed method 'bootstrapper' to more descriptive 'bind' in BlocWidgetState
 
-## [0.0.11] - Refactor.
+## [0.0.12] - Refactor.
 * Added a working example to demonstrate how to use the code
