@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:blocstar/ActionState.dart';
-import 'package:blocstar/BlocModelBase.dart';
 import 'package:blocstar/BlocRunner.dart';
 import 'package:flutter/widgets.dart';
+
+import 'BlocContextBase.dart';
 
 abstract class BlocBase<TBlocContext extends BlocContextBase> {
   final _controller = StreamController<TBlocContext>();

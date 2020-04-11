@@ -1,6 +1,5 @@
 import 'package:blocstar/BlocWidgetState.dart';
 import 'package:blocstar_example/Modules/Counter/Blocstar/CounterBloc.dart';
-import 'package:blocstar_example/Modules/Counter/Blocstar/CounterBlocModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -12,7 +11,7 @@ class Counter extends StatefulWidget {
 }
 
 class _CounterState
-    extends BlocWidgetState<Counter, CounterBloc, CounterBlocModel> {
+    extends BlocWidgetState<Counter, CounterBloc> {
   Widget _getCenterText(String text) {
     return Center(
       child: Container(padding: EdgeInsets.all(20), child: Text(text)),
@@ -66,11 +65,11 @@ class _CounterState
   }
 
   Widget get _body {
-    if (model == null) {
+    if (bloc.initialized == false) {
       bloc.initializeAsync();
       return _getCenterText("Initializing");
     } else {
-      if (model.actionState.busy) {
+      if (bloc.context.actionState.busy) {
         return _workingWidget;
       } else {
         return _readyWidget;
@@ -79,14 +78,14 @@ class _CounterState
   }
 
   Widget get _outputWidgets {
-    if (model.actionState.lastActionTimedOut) {
+    if (bloc.context.actionState.lastActionTimedOut) {
       return _getCenterText(
           "Oopsie. Looks like last action took too long to complete. Gracefully inform the user and give suggestions");
-    } else if (model.actionState.errorOccuredOnLastAction) {
+    } else if (bloc.context.actionState.errorOccuredOnLastAction) {
       return _getCenterText(
           "Wow! An exception. How could this happen while we were so careful? Anyhow, inform the user, figure out a fallback action e.t.c");
     } else {
-      return _getCenterText(model.count.toString());
+      return _getCenterText(bloc.context.count.toString());
     }
   }
 

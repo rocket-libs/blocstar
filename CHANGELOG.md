@@ -40,3 +40,6 @@
 
 ## [0.0.19] - Refactor.
 * Changed confusing name 'model' to 'context'
+
+## [0.0.20] - Bugfix.
+* Simple refactor

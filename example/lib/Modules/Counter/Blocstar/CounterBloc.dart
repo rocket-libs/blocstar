@@ -1,14 +1,13 @@
 import 'package:blocstar/BlocBase.dart';
-import 'package:blocstar/BlocRunner.dart';
-import 'package:blocstar_example/Modules/Counter/Blocstar/CounterBlocModel.dart';
+import 'CounterBlocContext.dart';
 
-class CounterBloc extends BlocBase<CounterBlocModel> {
+class CounterBloc extends BlocBase<CounterBlocContext> {
   @override
   Future initializeAsync() async {
-    context = new CounterBlocModel(
+    context = new CounterBlocContext(
         count: 0,
         description: "Button Press Count",
-        onAppStateChanged: onAppStateChangedCallback);
+        onActionStateChanged: onActionStateChangedCallback);
     sinkDefault();
   }
 
