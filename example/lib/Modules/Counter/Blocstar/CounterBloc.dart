@@ -15,18 +15,21 @@ class CounterBloc extends BlocBase<CounterBlocModel> {
   buttonPressedAsync(
     int duration,
   ) async {
-    await BlocRunner.runAsync(
-        function: () async {
-          await Future.delayed(new Duration(seconds: duration), () {
-            if(currentModel.actionState.lastActionTimedOut){
-              return;
-            }else{
-              _incrementCount();
-            }
-          }); 
-        },
-        actionState: currentModel.actionState,
+    await runAsync(
+        function: () async => await _incrementAsync(duration),
         timeoutSeconds: 7);
+  }
+
+  _incrementAsync(int duration) async {
+    final newCount = await Future.delayed(new Duration(seconds: duration), () {
+      return currentModel.count + 1;
+    });
+
+    //Timed out calls or calls in error, return null
+    if (newCount != null) {
+      currentModel = currentModel.merge(newCount: currentModel.count + 1);
+      sinkDefault();
+    }
   }
 
   simulateExceptionAsync() async {
@@ -36,10 +39,5 @@ class CounterBloc extends BlocBase<CounterBlocModel> {
               new Duration(seconds: 3), () => throw new Exception("Bad Luck"));
         },
         timeoutSeconds: 7);
-  }
-
-  _incrementCount() {
-    currentModel = currentModel.merge(newCount: currentModel.count + 1);
-    sinkDefault();
   }
 }

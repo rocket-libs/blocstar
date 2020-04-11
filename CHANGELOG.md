@@ -22,3 +22,15 @@
 
 ## [0.0.12] - Refactor.
 * Added a working example to demonstrate how to use the code
+
+## [0.0.13] - Refactor.
+* Added functionality for self-canceling of tasks that throw exceptions or those that timeout
+
+## [0.0.14] - Bugfix.
+* Fixed issue that was resulting in timed-out calls later returning a value when they should return null.
+
+## [0.0.15] - Bugfix.
+* Fixed issue that was resulting in timed-out calls later returning a value when they should return null (for real this time).
+
+## [0.0.16] - Bugfix.
+* Fixed issue that was resulting in timed-out calls later returning a value when they should return null (super for real this time).
