@@ -49,7 +49,7 @@ abstract class BlocWidgetState<
     if (bloc.initialized == false) {
       return onNullContext();
     }else{
-      final context = (bloc.context as BlocContextBase);
+      final context = bloc.context;
       if (context.actionState.busy) {
         return onBusy();
       } else if (context.actionState.lastActionTimedOut) {

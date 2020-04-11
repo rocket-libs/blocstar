@@ -43,3 +43,6 @@
 
 ## [0.0.20] - Bugfix.
 * Simple refactor
+
+## [0.0.20] - Refactor.
+* Removed unnecessary cast
