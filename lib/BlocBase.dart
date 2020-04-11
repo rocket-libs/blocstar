@@ -5,41 +5,43 @@ import 'package:blocstar/BlocModelBase.dart';
 import 'package:blocstar/BlocRunner.dart';
 import 'package:flutter/widgets.dart';
 
-abstract class BlocBase<TBlocModel extends BlocModelBase> {
-  final _controller = StreamController<TBlocModel>();
-  TBlocModel currentModel;
+abstract class BlocBase<TBlocContext extends BlocContextBase> {
+  final _controller = StreamController<TBlocContext>();
+  TBlocContext context;
 
-  Stream<TBlocModel> get stream => _controller.stream;
+  Stream<TBlocContext> get stream => _controller.stream;
 
   Future initializeAsync();
 
-  onAppStateChangedCallback(ActionState actionState) {
+  onActionStateChangedCallback(ActionState actionState) {
     sinkDefault();
   }
 
   sinkDefault() {
-    sink(currentModel);
+    sink(context);
   }
 
-  sink(TBlocModel model) {
+  sink(TBlocContext context) {
     if (isClosed == false) {
-      currentModel = model;
-      _controller.sink.add(model);
+      context = context;
+      _controller.sink.add(context);
     } else {
       throw new Exception("Cannot sink into a closed controller");
     }
   }
 
-  bool get modelInitialized {
-    return currentModel != null;
+  bool get initialized {
+    return context != null;
   }
+
+  
 
   Future runAsync<TResult>(
       {@required Future<TResult> Function() function,
       @required int timeoutSeconds}) async {
     return await BlocRunner.runAsync(
         function: function,
-        actionState: currentModel.actionState,
+        actionState: context.actionState,
         timeoutSeconds: timeoutSeconds);
   }
 

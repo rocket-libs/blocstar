@@ -2,7 +2,7 @@ import 'package:blocstar/ActionState.dart';
 import 'package:blocstar/BlocModelBase.dart';
 import 'package:blocstar/Mergeable.dart';
 
-class CounterBlocModel extends BlocModelBase<CounterBlocModel> {
+class CounterBlocModel extends BlocContextBase<CounterBlocModel> {
   final int count;
   final String description;
 

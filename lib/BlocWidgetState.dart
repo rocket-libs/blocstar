@@ -1,5 +1,5 @@
+import 'package:blocstar/BlocContextBase.dart';
 import 'package:blocstar/BlocFactory.dart';
-import 'package:blocstar/BlocModelBase.dart';
 import 'package:flutter/widgets.dart';
 
 import 'BlocBase.dart';
@@ -7,10 +7,8 @@ import 'BlocProvider.dart';
 
 abstract class BlocWidgetState<
     TState extends StatefulWidget,
-    TBloc extends BlocBase,
-    TBlocModel extends BlocModelBase> extends State<TState> {
+    TBloc extends BlocBase> extends State<TState> {
   TBloc _privateBloc;
-  TBlocModel model;
 
   willDispose();
 
@@ -43,36 +41,38 @@ abstract class BlocWidgetState<
   }
 
   Widget getCurrentWidget(
-      {@required Widget Function() onNullModel,
+      {@required Widget Function() onNullContext,
       @required Widget Function() onBusy,
       @required Widget Function() onError,
       @required Widget Function() onTimeOut,
       @required Widget Function() onSuccess}) {
-    if (model == null) {
-      return onNullModel();
-    } else if (model.actionState.busy) {
-      return onBusy();
-    } else if (model.actionState.lastActionTimedOut) {
-      return onTimeOut();
-    } else if (model.actionState.errorOccuredOnLastAction) {
-      return onError();
-    } else {
-      return onSuccess();
+    if (bloc.initialized == false) {
+      return onNullContext();
+    }else{
+      final context = (bloc.context as BlocContextBase);
+      if (context.actionState.busy) {
+        return onBusy();
+      } else if (context.actionState.lastActionTimedOut) {
+        return onTimeOut();
+      } else if (context.actionState.errorOccuredOnLastAction) {
+        return onError();
+      } else {
+        return onSuccess();
+      }
     }
   }
 
   Widget _bootstrapper(
       {@required Widget Function() fnNoData,
-      @required Widget Function(TBlocModel) fnHasData}) {
+      @required Widget Function(dynamic) fnHasData}) {
     var widget = BlocProvider<TBloc>(
       bloc: bloc,
-      child: StreamBuilder<TBlocModel>(
+      child: StreamBuilder<dynamic>(
           stream: bloc.stream,
           builder: (blocContext, snapshot) {
             if (snapshot.hasData == false) {
               return fnNoData();
             }
-            model = snapshot.data;
             return fnHasData(snapshot.data);
           }),
     );

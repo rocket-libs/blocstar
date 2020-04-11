@@ -34,3 +34,9 @@
 
 ## [0.0.16] - Bugfix.
 * Fixed issue that was resulting in timed-out calls later returning a value when they should return null (super for real this time).
+
+## [0.0.17] - Bugfix.
+* Simple refactor
+
+## [0.0.19] - Refactor.
+* Changed confusing name 'model' to 'context'

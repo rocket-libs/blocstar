@@ -5,7 +5,7 @@ import 'package:blocstar_example/Modules/Counter/Blocstar/CounterBlocModel.dart'
 class CounterBloc extends BlocBase<CounterBlocModel> {
   @override
   Future initializeAsync() async {
-    currentModel = new CounterBlocModel(
+    context = new CounterBlocModel(
         count: 0,
         description: "Button Press Count",
         onAppStateChanged: onAppStateChangedCallback);
@@ -22,12 +22,12 @@ class CounterBloc extends BlocBase<CounterBlocModel> {
 
   _incrementAsync(int duration) async {
     final newCount = await Future.delayed(new Duration(seconds: duration), () {
-      return currentModel.count + 1;
+      return context.count + 1;
     });
 
     //Timed out calls or calls in error, return null
     if (newCount != null) {
-      currentModel = currentModel.merge(newCount: currentModel.count + 1);
+      context = context.merge(newCount: context.count + 1);
       sinkDefault();
     }
   }
