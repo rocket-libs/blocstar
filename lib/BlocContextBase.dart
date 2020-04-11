@@ -1,9 +1,10 @@
-import 'package:blocstar/Mergeable.dart';
+import 'package:blocstar/DataManagement/Mergeable.dart';
 import 'package:flutter/material.dart';
 
 import 'ActionState.dart';
 
-abstract class BlocContextBase<TBlocContext> implements Mergeable<TBlocContext> {
+abstract class BlocContextBase<TBlocContext>
+    implements Mergeable<TBlocContext> {
   ActionState actionState;
 
   BlocContextBase(Function(ActionState) onActionStateChanged) {
@@ -11,7 +12,8 @@ abstract class BlocContextBase<TBlocContext> implements Mergeable<TBlocContext> 
   }
 
   @protected
-  BlocContextBase<TBlocContext> mergeAppState(BlocContextBase<TBlocContext> newModel) {
+  BlocContextBase<TBlocContext> mergeAppState(
+      BlocContextBase<TBlocContext> newModel) {
     newModel.actionState =
         new ActionState(false, false, null, actionState.onActionStateChanged);
     return newModel;

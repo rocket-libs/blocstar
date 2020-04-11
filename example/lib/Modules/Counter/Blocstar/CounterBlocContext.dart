@@ -7,7 +7,9 @@ class CounterBlocContext extends BlocContextBase<CounterBlocContext> {
   final String description;
 
   CounterBlocContext(
-      {this.count, this.description, Function(ActionState) onActionStateChanged})
+      {this.count,
+      this.description,
+      Function(ActionState) onActionStateChanged})
       : super(onActionStateChanged);
 
   @override

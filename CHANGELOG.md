@@ -44,5 +44,8 @@
 ## [0.0.20] - Bugfix.
 * Simple refactor
 
-## [0.0.20] - Refactor.
+## [0.0.21] - Refactor.
 * Removed unnecessary cast
+
+## [0.0.22] - New Functionality.
+* Added code to assist with serialization and deserialization of models

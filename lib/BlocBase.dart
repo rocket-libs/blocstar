@@ -35,8 +35,6 @@ abstract class BlocBase<TBlocContext extends BlocContextBase> {
     return context != null;
   }
 
-  
-
   Future runAsync<TResult>(
       {@required Future<TResult> Function() function,
       @required int timeoutSeconds}) async {

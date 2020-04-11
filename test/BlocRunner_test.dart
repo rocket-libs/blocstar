@@ -18,7 +18,7 @@ void main() {
     expect(newActionState.lastActionTimedOut, true);
   });
 
-  group("Timeout vs Completion return values", (){
+  group("Timeout vs Completion return values", () {
     final successResult = 6;
 
     test("Timeout returns null", () async {
@@ -28,10 +28,9 @@ void main() {
         newActionState = newActionState; // to silence warning
       });
 
-
       final actualResult = await BlocRunner.runAsync(
-          function: () async =>
-              await Future.delayed(new Duration(milliseconds: 1100), () => successResult),
+          function: () async => await Future.delayed(
+              new Duration(milliseconds: 1100), () => successResult),
           actionState: actionState,
           timeoutSeconds: 1);
 
@@ -45,18 +44,15 @@ void main() {
         newActionState = newActionState; // to silence warning
       });
 
-
       final actualResult = await BlocRunner.runAsync(
-          function: () async =>
-              Future.delayed(new Duration(milliseconds: 500), () => successResult),
+          function: () async => Future.delayed(
+              new Duration(milliseconds: 500), () => successResult),
           actionState: actionState,
           timeoutSeconds: 1);
 
       expect(actualResult, successResult);
     });
-
   });
-  
 
   test("Timeout does not fire too early", () async {
     ActionState newActionState;

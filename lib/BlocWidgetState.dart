@@ -1,12 +1,10 @@
-import 'package:blocstar/BlocContextBase.dart';
 import 'package:blocstar/BlocFactory.dart';
 import 'package:flutter/widgets.dart';
 
 import 'BlocBase.dart';
 import 'BlocProvider.dart';
 
-abstract class BlocWidgetState<
-    TState extends StatefulWidget,
+abstract class BlocWidgetState<TState extends StatefulWidget,
     TBloc extends BlocBase> extends State<TState> {
   TBloc _privateBloc;
 
@@ -48,7 +46,7 @@ abstract class BlocWidgetState<
       @required Widget Function() onSuccess}) {
     if (bloc.initialized == false) {
       return onNullContext();
-    }else{
+    } else {
       final context = bloc.context;
       if (context.actionState.busy) {
         return onBusy();

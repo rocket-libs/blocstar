@@ -21,9 +21,10 @@ class BlocRunner {
           await function().timeout(Duration(seconds: timeoutSeconds));
       cancelableCompleter.complete(await timedFuture());
       final result = cancelableCompleter.operation.value;
-      if (actionState.errorOccuredOnLastAction || actionState.lastActionTimedOut) {
+      if (actionState.errorOccuredOnLastAction ||
+          actionState.lastActionTimedOut) {
         return null;
-      } else{
+      } else {
         return result;
       }
     } on TimeoutException catch (toe) {
