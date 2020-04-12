@@ -49,3 +49,6 @@
 
 ## [0.0.22] - New Functionality.
 * Added code to assist with serialization and deserialization of models
+
+## [0.0.23] - New Functionality.
+* Fixed crash
