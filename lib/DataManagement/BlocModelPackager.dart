@@ -16,12 +16,16 @@ class BlocModelPackager {
   static List<TBlocModel>
       deserializeMany<TBlocModel extends BlocModel<TBlocModel>>(
           List<dynamic> mapsList) {
-    final instance = _getInstance<TBlocModel>();
     final List<TBlocModel> list = new List<TBlocModel>();
-    for (var map in mapsList) {
-      list.add(deserializeSingle(map, instance: instance));
+    if(mapsList == null){
+      return list;
+    }else{
+      final instance = _getInstance<TBlocModel>();
+      for (var map in mapsList) {
+        list.add(deserializeSingle(map, instance: instance));
+      }
+      return list;
     }
-    return list;
   }
 
   static TBlocModel deserializeSingle<TBlocModel extends BlocModel>(
