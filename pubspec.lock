@@ -28,7 +28,7 @@ packages:
       name: bargain_di
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.3"
   boolean_selector:
     dependency: transitive
     description:
