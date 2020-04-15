@@ -52,3 +52,6 @@
 
 ## [0.0.23] - New Functionality.
 * Fixed crash
+
+## [0.1.0] - DRYing up code.
+* Outsourced object creation to the excellent bargain_di package

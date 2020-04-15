@@ -1,25 +1,18 @@
 import 'package:blocstar/DataManagement/BlocModel.dart';
+import 'package:blocstar/ObjectFactories/BlocstarObjectsProvider.dart';
 
 class BlocModelPackager {
-  static final factories = new Map<Type, dynamic Function()>();
-
   static TBlocModel _getInstance<TBlocModel extends BlocModel>() {
-    if (factories.containsKey(TBlocModel)) {
-      final factory = factories[TBlocModel];
-      return factory() as TBlocModel;
-    } else {
-      throw new Exception(
-          "Could not find a model initializer for type $TBlocModel");
-    }
+    return BlocstarObjectsProvider.objectFactory.getInstance<TBlocModel>();
   }
 
   static List<TBlocModel>
       deserializeMany<TBlocModel extends BlocModel<TBlocModel>>(
           List<dynamic> mapsList) {
     final List<TBlocModel> list = new List<TBlocModel>();
-    if(mapsList == null){
+    if (mapsList == null) {
       return list;
-    }else{
+    } else {
       final instance = _getInstance<TBlocModel>();
       for (var map in mapsList) {
         list.add(deserializeSingle(map, instance: instance));

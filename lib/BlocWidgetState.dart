@@ -1,8 +1,8 @@
-import 'package:blocstar/BlocFactory.dart';
 import 'package:flutter/widgets.dart';
 
 import 'BlocBase.dart';
 import 'BlocProvider.dart';
+import 'ObjectFactories/BlocstarObjectsProvider.dart';
 
 abstract class BlocWidgetState<TState extends StatefulWidget,
     TBloc extends BlocBase> extends State<TState> {
@@ -25,12 +25,7 @@ abstract class BlocWidgetState<TState extends StatefulWidget,
   }
 
   TBloc _create() {
-    if (BlocFactory.factories.containsKey(TBloc)) {
-      var factory = BlocFactory.factories[TBloc];
-      return factory() as TBloc;
-    } else {
-      throw new Exception("Could not find a factory for type $TBloc");
-    }
+    return BlocstarObjectsProvider.objectFactory.getInstance<TBloc>();
   }
 
   Widget bind({@required Widget Function() fnScreenGetter}) {
