@@ -5,6 +5,9 @@ import 'package:blocstar/ActionState.dart';
 import 'package:flutter/widgets.dart';
 
 class BlocRunner {
+  
+  /// This method will return null should an exception be thrown or should it timeout.
+  ///  Non-null return values are only returned on success
   static Future<TResult> runAsync<TResult>(
       {@required Future<TResult> Function() function,
       @required ActionState actionState,
