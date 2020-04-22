@@ -36,7 +36,10 @@ abstract class BlocBase<TBlocContext extends BlocContextBase> {
   }
 
   /// This method will return null should an exception be thrown or should it timeout.
-  ///  Non-null return values are only returned on success
+  /// Non-null return values are only returned on success
+  /// Calling 'sinkDefault' after this method returns null, overwrites any error or timeout information that
+  /// will have been set by Blocstar. First consume the error or timeout information if you you need it, before subsequent
+  /// calls to 'sinkDefault' 
   Future runAsync<TResult>(
       {@required Future<TResult> Function() function,
       @required int timeoutSeconds}) async {
