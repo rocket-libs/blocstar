@@ -1,6 +1,3 @@
-## [0.0.1] - TODO: Add release date.
-
-* TODO: Describe initial release.
 
 ## [0.0.5] - TODO: Add release date.
 * Made onAppStateChanged mandatory in BlocModelBase
@@ -41,7 +38,6 @@
 ## [0.0.19] - Refactor.
 * Changed confusing name 'model' to 'context'
 
-
 ## [0.1.2] - Refactor.
 * Simple refactor
 
@@ -59,3 +55,6 @@
 
 ## [0.1.0] - DRYing up code.
 * Outsourced object creation to the excellent bargain_di package
+
+## [1.0.4] - Added documentation.
+* Added documentation
