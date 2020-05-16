@@ -1,32 +1,36 @@
-import 'package:blocstar/ActionState.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'TestContext.dart';
 
 void main() {
   test("busy state triggers ActionState", () {
     var busy = false;
-    final actionState = new ActionState(false, false, null, (actionState) {
-      busy = actionState.busy;
+    final context = new TestContext((ctx) {
+      busy = ctx.actionState.busy;
     });
-    actionState.busy = true;
+
+    context.actionState.busy = true;
     expect(busy, true);
   });
 
   test("last action timeout triggers ActionState", () {
     var lastActionTimeOut = false;
-    final actionState = new ActionState(false, false, null, (actionState) {
-      lastActionTimeOut = actionState.lastActionTimedOut;
+    final context = new TestContext((ctx) {
+      lastActionTimeOut = ctx.actionState.lastActionTimedOut;
     });
-    actionState.lastActionTimedOut = true;
+
+    context.actionState.lastActionTimedOut = true;
     expect(lastActionTimeOut, true);
   });
 
   test("last action exception triggers ActionState", () {
     final exceptionMessage = "blah";
     Exception lastException;
-    final actionState = new ActionState(false, false, null, (actionState) {
-      lastException = actionState.lastActionException;
+    final context = new TestContext((ctx) {
+      lastException = ctx.actionState.lastActionException;
     });
-    actionState.lastActionException = new Exception(exceptionMessage);
+
+    context.actionState.lastActionException = new Exception(exceptionMessage);
     expect(lastException != null, true);
   });
 }

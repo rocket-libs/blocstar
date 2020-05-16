@@ -1,5 +1,5 @@
 class Mergeable<T> {
-  T merge() => null;
+  merge() => null;
 }
 
 T resolveValue<T>(T oldValue, T newValue) {

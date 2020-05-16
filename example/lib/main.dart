@@ -1,6 +1,5 @@
-import 'package:blocstar/BlocFactory.dart';
-import 'package:blocstar_example/Modules/Counter/Blocstar/CounterBloc.dart';
 import 'package:blocstar_example/Modules/Counter/UI/Counter.dart';
+import 'package:blocstar_example/Shared/Blocstar/BlocRegistry.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -22,6 +21,6 @@ class MyApp extends StatelessWidget {
   }
 
   _initializeBlocs() {
-    BlocFactory.factories[CounterBloc] = () => new CounterBloc();
+    BlocRegistry.register();
   }
 }
