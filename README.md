@@ -1,4 +1,5 @@
 # blocstar
+![Dart CI](https://github.com/rocket-libs/blocstar/workflows/Dart%20CI/badge.svg?branch=master)
 
 Bloc based nano framework, that helps structure how your flutter code is laid out and written.
 
