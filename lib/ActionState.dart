@@ -1,24 +1,26 @@
+import 'package:blocstar/BlocBase.dart';
+
 import 'BlocContextBase.dart';
 
 class ActionState<TBlocContext extends BlocContextBase> {
-  bool _busy;
-  bool _lastActionTimedOut;
+  bool _busy = false;
+  bool _lastActionTimedOut = false;
   Exception _lastActionException;
-  final TBlocContext context;
+  final BlocBase<TBlocContext> blocBase;
 
   ActionState(this._busy, this._lastActionTimedOut, this._lastActionException,
-      this.context);
+      this.blocBase);
 
   set busy(bool value) {
     _busy = value;
-    this.context.onContextChanged(this.context);
+    blocBase.onContextChangedCallback(blocBase.context);
   }
 
   bool get busy => _busy;
 
   set lastActionTimedOut(bool value) {
     _lastActionTimedOut = value;
-    this.context.onContextChanged(this.context);
+    blocBase.onContextChangedCallback(blocBase.context);
   }
 
   bool get lastActionTimedOut => _lastActionTimedOut;
@@ -27,7 +29,7 @@ class ActionState<TBlocContext extends BlocContextBase> {
 
   set lastActionException(Exception exception) {
     _lastActionException = exception;
-    this.context.onContextChanged(this.context);
+    blocBase.onContextChangedCallback(blocBase.context);
   }
 
   Exception get lastActionException => _lastActionException;

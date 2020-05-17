@@ -80,3 +80,6 @@ This way there is no need to manually call a method everytime context is updated
 
 ## [1.1.0-beta08] - Removed redundant call
 * Removed redundant call
+
+## [1.1.0-beta09] - Fixed breaking tests
+* Fixed breaking tests due to change in code

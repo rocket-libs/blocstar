@@ -1,36 +1,30 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'TestContext.dart';
+import 'TestBloc.dart';
 
 void main() {
   test("busy state triggers ActionState", () {
-    var busy = false;
-    final context = new TestContext((ctx) {
-      busy = ctx.actionState.busy;
-    });
-
-    context.actionState.busy = true;
-    expect(busy, true);
+    final testBloc = new TestBloc()..initializeAsync();
+    final testContext = testBloc.context;
+    testContext.actionState.busy = true;
+    expect(testContext.actionState.busy, true);
+    expect(testBloc.context.lastUpdated > 0, true);
   });
 
   test("last action timeout triggers ActionState", () {
-    var lastActionTimeOut = false;
-    final context = new TestContext((ctx) {
-      lastActionTimeOut = ctx.actionState.lastActionTimedOut;
-    });
-
-    context.actionState.lastActionTimedOut = true;
-    expect(lastActionTimeOut, true);
+    final testBloc = new TestBloc()..initializeAsync();
+    final testContext = testBloc.context;
+    testContext.actionState.lastActionTimedOut = true;
+    expect(testContext.actionState.lastActionTimedOut, true);
+    expect(testBloc.context.lastUpdated > 0, true);
   });
 
   test("last action exception triggers ActionState", () {
-    final exceptionMessage = "blah";
-    Exception lastException;
-    final context = new TestContext((ctx) {
-      lastException = ctx.actionState.lastActionException;
-    });
-
-    context.actionState.lastActionException = new Exception(exceptionMessage);
-    expect(lastException != null, true);
+    final testBloc = new TestBloc()..initializeAsync();
+    final testContext = testBloc.context;
+    final theException = new Exception("Bad Stuff");
+    testContext.actionState.lastActionException = theException;
+    expect(testContext.actionState.lastActionException != null, true);
+    expect(testBloc.context.lastUpdated > 0, true);
   });
 }

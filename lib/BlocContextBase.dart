@@ -1,23 +1,16 @@
+import 'package:blocstar/BlocBase.dart';
 import 'package:blocstar/DataManagement/Mergeable.dart';
-import 'package:flutter/material.dart';
 
 import 'ActionState.dart';
 
 abstract class BlocContextBase<TBlocContext>
     implements Mergeable<TBlocContext> {
   ActionState actionState;
-  final Function(TBlocContext) onContextChanged;
+  final BlocBase<BlocContextBase<TBlocContext>> blocBase;
 
-  BlocContextBase(this.onContextChanged) {
-    actionState = new ActionState(false, false, null, this);
-    onContextChanged(this as TBlocContext);
-  }
-
-  @Deprecated("We probably don't need this anymore")
-  @protected
-  BlocContextBase<TBlocContext> mergeAppState(
-      BlocContextBase<TBlocContext> newModel) {
-    newModel.actionState = new ActionState(false, false, null, this);
-    return newModel;
+  BlocContextBase(this.blocBase) {
+    actionState = this.blocBase.context?.actionState ??
+        new ActionState(false, false, null, this.blocBase);
+    blocBase.onContextChangedCallback(this);
   }
 }

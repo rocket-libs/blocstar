@@ -14,9 +14,6 @@ abstract class BlocBase<TBlocContext extends BlocContextBase> {
   Future initializeAsync();
 
   onContextChangedCallback(TBlocContext updatedContext) {
-    if (updatedContext == null) {
-      throw new Exception("Null updatedContext is not allowed");
-    }
     sink(updatedContext);
   }
 

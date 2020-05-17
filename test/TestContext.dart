@@ -1,14 +1,21 @@
+import 'package:blocstar/BlocBase.dart';
 import 'package:blocstar/BlocContextBase.dart';
 import 'package:blocstar/DataManagement/Mergeable.dart';
 
 class TestContext extends BlocContextBase<TestContext> {
   final int count;
-  TestContext(Function(dynamic) onContextChanged, {this.count})
-      : super(onContextChanged);
+  final int rawValue;
+  final int lastUpdated;
+
+  TestContext(BlocBase<BlocContextBase<TestContext>> blocBase,
+      {this.count, this.rawValue, this.lastUpdated})
+      : super(blocBase);
 
   @override
-  merge({int newCount}) {
-    new TestContext(this.onContextChanged,
-        count: resolveValue(count, newCount));
+  merge({int newCount, int newRawValue}) {
+    new TestContext(blocBase,
+        count: resolveValue(count, newCount),
+        rawValue: resolveValue(rawValue, newRawValue),
+        lastUpdated: DateTime.now().millisecondsSinceEpoch);
   }
 }

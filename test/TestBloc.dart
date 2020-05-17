@@ -5,7 +5,7 @@ import 'TestContext.dart';
 class TestBloc extends BlocBase<TestContext> {
   @override
   Future initializeAsync() async {
-    context = new TestContext(onContextChangedCallback, count: 0);
+    new TestContext(this, count: 0);
   }
 
   Future increment() async {
@@ -19,5 +19,14 @@ class TestBloc extends BlocBase<TestContext> {
   Future _delayedIncrement() async {
     final result = context.count + 1;
     return await Future.delayed(Duration(milliseconds: 1), () => result);
+  }
+
+  @override
+  onContextChangedCallback(TestContext updatedContext) {
+    if (updatedContext.lastUpdated == null) {
+      updatedContext.merge();
+      return;
+    }
+    return super.onContextChangedCallback(updatedContext);
   }
 }

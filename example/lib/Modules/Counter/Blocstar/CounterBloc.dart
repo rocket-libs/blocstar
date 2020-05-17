@@ -5,7 +5,7 @@ import 'CounterContext.dart';
 class CounterBloc extends BlocBase<CounterContext> {
   @override
   Future initializeAsync() async {
-    context = new CounterContext(onContextChangedCallback,
+    context = new CounterContext(this,
         count: 0, description: "Button Press Count");
   }
 

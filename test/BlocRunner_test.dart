@@ -1,29 +1,27 @@
-import 'package:blocstar/ActionState.dart';
 import 'package:blocstar/BlocRunner.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'TestContext.dart';
+import 'TestBloc.dart';
 
 void main() {
   test("Timeout fires on long delay", () async {
-    ActionState newActionState;
-    final context = new TestContext((ctx) {
-      newActionState = ctx.actionState;
-    });
+    final testBloc = new TestBloc()..initializeAsync();
+    final testContext = testBloc.context;
 
     await BlocRunner.runAsync(
         function: () async =>
             Future.delayed(new Duration(milliseconds: 1100), () => {}),
-        actionState: context.actionState,
+        actionState: testContext.actionState,
         timeoutSeconds: 1);
 
-    expect(newActionState.lastActionTimedOut, true);
+    expect(testContext.actionState.lastActionTimedOut, true);
   });
 
   group("Timeout vs Completion return values", () {
     final successResult = 6;
 
     test("Timeout returns null", () async {
-      final testContext = new TestContext((_) {});
+      final testBloc = new TestBloc()..initializeAsync();
+      final testContext = testBloc.context;
 
       final actualResult = await BlocRunner.runAsync(
           function: () async => await Future.delayed(
@@ -35,30 +33,29 @@ void main() {
     });
 
     test("Completion returns actual value", () async {
-      TestContext resultContext;
-      final workingContext = new TestContext((ctx) {
-        resultContext = ctx;
-      });
+      final testBloc = new TestBloc()..initializeAsync();
+      final testContext = testBloc.context;
 
       final actualResult = await BlocRunner.runAsync(
           function: () async => Future.delayed(
               new Duration(milliseconds: 500), () => successResult),
-          actionState: workingContext.actionState,
+          actionState: testContext.actionState,
           timeoutSeconds: 1);
-      workingContext.merge(newCount: actualResult);
-      expect(resultContext.count, successResult);
+      testContext.merge(newRawValue: actualResult);
+      expect(testBloc.context.rawValue, successResult);
     });
   });
 
   test("Timeout does not fire too early", () async {
-    final textContext = new TestContext((ctx) {});
+    final testBloc = new TestBloc()..initializeAsync();
+    final testContext = testBloc.context;
 
     await BlocRunner.runAsync(
         function: () async =>
             Future.delayed(new Duration(milliseconds: 900), () => {}),
-        actionState: textContext.actionState,
+        actionState: testContext.actionState,
         timeoutSeconds: 1);
 
-    expect(textContext.actionState.lastActionTimedOut, false);
+    expect(testContext.actionState.lastActionTimedOut, false);
   });
 }
