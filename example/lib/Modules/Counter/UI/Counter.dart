@@ -34,7 +34,7 @@ class _CounterState extends BlocWidgetState<Counter, CounterBloc> {
     return [
       _getButton(
           displayLabel: "Simulate Timeout",
-          onPressed: () => bloc.buttonPressedAsync(10)),
+          onPressed: () => bloc.buttonPressedAsync(4)),
       _getButton(
           displayLabel: "Simulate Exception",
           onPressed: () => bloc.simulateExceptionAsync()),

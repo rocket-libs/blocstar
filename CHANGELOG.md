@@ -58,3 +58,31 @@
 
 ## [1.0.4] - Added documentation.
 * Added documentation
+
+## [1.1.0-beta01] - Reduce boilerplate
+* Centralized functionality to broadcast changes to context in the context object itself.
+This way there is no need to manually call a method everytime context is updated.
+
+## [1.1.0-beta03] - Reduce boilerplate even further
+* No need to pass ActionState in business logic, moved its setup to context class for clearer code
+
+## [1.1.0-beta04] - Bugfix
+* Removed code that was breaking build
+
+## [1.1.0-beta05] - Bugfix
+* Replaced code using closure as capture variable was preventing proper update
+
+## [1.1.0-beta06] - Bugfix
+* Will this work
+
+## [1.1.0-beta07] - Blocked passing of null values to BlocBase
+* Blocked passing of null values to BlocBase
+
+## [1.1.0-beta08] - Removed redundant call
+* Removed redundant call
+
+## [1.1.0-beta09] - Fixed breaking tests
+* Fixed breaking tests due to change in code
+
+## [1.1.0] - Efficiency & Documentation
+* Removed massively reduced boilerplate required and also enriched the documentation to allow better description of the project.
