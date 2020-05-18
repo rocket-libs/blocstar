@@ -6,9 +6,9 @@ class CounterContext extends BlocContextBase<CounterContext> {
   final int count;
   final String description;
 
-  CounterContext(BlocBase<BlocContextBase<CounterContext>> blocBase, {this.count, this.description}) : super(blocBase);
-
-  
+  CounterContext(BlocBase<BlocContextBase<CounterContext>> blocBase,
+      {this.count, this.description})
+      : super(blocBase);
 
   @override
   merge({int newCount, String newDescription}) {

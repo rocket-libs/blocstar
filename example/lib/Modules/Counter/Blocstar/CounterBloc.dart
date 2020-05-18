@@ -5,8 +5,8 @@ import 'CounterContext.dart';
 class CounterBloc extends BlocBase<CounterContext> {
   @override
   Future initializeAsync() async {
-    context = new CounterContext(this,
-        count: 0, description: "Button Press Count");
+    context =
+        new CounterContext(this, count: 0, description: "Button Press Count");
   }
 
   buttonPressedAsync(
@@ -22,7 +22,7 @@ class CounterBloc extends BlocBase<CounterContext> {
     }
   }
 
-  /// This method emulates an a async operation by instituting an delay of a user specified 
+  /// This method emulates an a async operation by instituting an delay of a user specified
   /// number of seconds before it does the increment.
   /// It allows us to see how Blocstar handles async calls.
   Future<int> _incrementAsync(int duration) async {

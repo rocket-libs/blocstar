@@ -83,3 +83,6 @@ This way there is no need to manually call a method everytime context is updated
 
 ## [1.1.0-beta09] - Fixed breaking tests
 * Fixed breaking tests due to change in code
+
+## [1.1.0] - Efficiency & Documentation
+* Removed massively reduced boilerplate required and also enriched the documentation to allow better description of the project.
