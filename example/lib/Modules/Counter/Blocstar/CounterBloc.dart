@@ -22,6 +22,9 @@ class CounterBloc extends BlocBase<CounterContext> {
     }
   }
 
+  /// This method emulates an a async operation by instituting an delay of a user specified 
+  /// number of seconds before it does the increment.
+  /// It allows us to see how Blocstar handles async calls.
   Future<int> _incrementAsync(int duration) async {
     final incrementedCount =
         await Future.delayed(new Duration(seconds: duration), () {
