@@ -4,27 +4,27 @@ import 'BlocProvider.dart';
 import 'ObjectFactories/BlocstarObjectsProvider.dart';
 
 abstract class BlocstarUIBinder<TState extends StatefulWidget,
-    TBloc extends BlocstarLogicBase> extends State<TState> {
-  TBloc _privateBloc;
+    TLogic extends BlocstarLogicBase> extends State<TState> {
+  TLogic _logic;
 
   willDispose();
 
   @override
   dispose() {
     willDispose();
-    bloc.dispose();
+    logic.dispose();
     super.dispose();
   }
 
-  TBloc get bloc {
-    if (_privateBloc == null || _privateBloc.isClosed) {
-      _privateBloc = _create();
+  TLogic get logic {
+    if (_logic == null || _logic.isClosed) {
+      _logic = _create();
     }
-    return _privateBloc;
+    return _logic;
   }
 
-  TBloc _create() {
-    return BlocstarObjectsProvider.objectFactory.getInstance<TBloc>();
+  TLogic _create() {
+    return BlocstarObjectsProvider.objectFactory.getInstance<TLogic>();
   }
 
   Widget bind({@required Widget Function() fnScreenGetter}) {
@@ -38,10 +38,10 @@ abstract class BlocstarUIBinder<TState extends StatefulWidget,
       @required Widget Function() onError,
       @required Widget Function() onTimeOut,
       @required Widget Function() onSuccess}) {
-    if (bloc.initialized == false) {
+    if (logic.initialized == false) {
       return onNullContext();
     } else {
-      final context = bloc.context;
+      final context = logic.context;
       if (context.actionState.busy) {
         return onBusy();
       } else if (context.actionState.lastActionTimedOut) {
@@ -57,10 +57,10 @@ abstract class BlocstarUIBinder<TState extends StatefulWidget,
   Widget _bootstrapper(
       {@required Widget Function() fnNoData,
       @required Widget Function(dynamic) fnHasData}) {
-    var widget = BlocProvider<TBloc>(
-      bloc: bloc,
+    var widget = BlocProvider<TLogic>(
+      bloc: logic,
       child: StreamBuilder<dynamic>(
-          stream: bloc.stream,
+          stream: logic.stream,
           builder: (blocContext, snapshot) {
             if (snapshot.hasData == false) {
               return fnNoData();

@@ -158,18 +158,18 @@ class _CounterState extends BlocWidgetState<Counter, CounterBloc> {
      }
      
     Widget get _body {
-        if (bloc.initialized == false) {
-          bloc.initializeAsync();
+        if (logic.initialized == false) {
+          logic.initializeAsync();
           return Text("Initializing");
         } else {
-            if (bloc.context.actionState.busy) {
+            if (logic.context.actionState.busy) {
                 return Text("Working. Please Wait");
-            } elseif (bloc.context.actionState.lastActionTimedOut) {
+            } elseif (logic.context.actionState.lastActionTimedOut) {
                 return Text("Last Action Timed Out");
-            } else if (bloc.context.actionState.errorOccuredOnLastAction) {
+            } else if (logic.context.actionState.errorOccuredOnLastAction) {
                 return Text("Last Action Failed");
             } else {
-                return Text("Count Is ${bloc.context.count.toString()}"");
+                return Text("Count Is ${logic.context.count.toString()}"");
             }
         }
     }
@@ -184,12 +184,12 @@ Let's break it down:
 
 **3.** Bind the Widget's state to the business logic via Blocstar's ```bind``` method. This we have done in the state's ```build``` method. Any method that returns a widget can be used as a parameter in the bind call. In our example we use the ```_getScreen``` method.
 
-**4.** The getter ```_body``` is where we control what our UI displays, we do this by interrogating the ```bloc``` variable (which is an instance of your business logic class) or the ```bloc.context``` object (which is an instance of your context class). There are six possible states that we are interested in.
+**4.** The getter ```_body``` is where we control what our UI displays, we do this by interrogating the ```bloc``` variable (which is an instance of your business logic class) or the ```logic.context``` object (which is an instance of your context class). There are six possible states that we are interested in.
 
-- ```bloc.initialized == false``` - this is usually when your widget has first loaded and we need to bootstrap our module. Call ```bloc.initializeAsync()``` (synchronously) then show a widget to let the use know what is happening.
-- ```bloc.context.actionState.busy == true``` - this indicates that your module is busy executing an async operation (e.g an http call). You probably want to show the user a progress indication widget here.
-- ```bloc.context.actionState.lastActionTimedOut == true``` - the module is no longer busy, but your async operation timed out. This allows you to bake important functionality into your app, like analytics, user driven retries e.t.c
-- ```bloc.context.actionState.errorOccuredOnLastAction == true``` - the module is no longer busy, but the operation failed with an error. The details of the error are available in ```bloc.context.actionState.lastActionException```. Again, just like above you get an access point in your module where you can track performance of your app and gracefully handle non-happy-paths. Additionally, this allows you to standardize error handling, making for an easy to learn codebase.
+- ```logic.initialized == false``` - this is usually when your widget has first loaded and we need to bootstrap our module. Call ```logic.initializeAsync()``` (synchronously) then show a widget to let the use know what is happening.
+- ```logic.context.actionState.busy == true``` - this indicates that your module is busy executing an async operation (e.g an http call). You probably want to show the user a progress indication widget here.
+- ```logic.context.actionState.lastActionTimedOut == true``` - the module is no longer busy, but your async operation timed out. This allows you to bake important functionality into your app, like analytics, user driven retries e.t.c
+- ```logic.context.actionState.errorOccuredOnLastAction == true``` - the module is no longer busy, but the operation failed with an error. The details of the error are available in ```logic.context.actionState.lastActionException```. Again, just like above you get an access point in your module where you can track performance of your app and gracefully handle non-happy-paths. Additionally, this allows you to standardize error handling, making for an easy to learn codebase.
 - All of the above states are false. This indicates that the module is on the happy-path.
 
 

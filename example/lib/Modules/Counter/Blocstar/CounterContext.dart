@@ -1,19 +1,20 @@
-import 'package:blocstar/BlocBase.dart';
+import 'package:blocstar/BlocstarContextBase.dart';
+import 'package:blocstar/BlocstarLogicBase.dart';
 import 'package:blocstar/DataManagement/Mergeable.dart';
 
-class CounterContext extends BlocstarLogicBaseContextBase<CounterContext> {
+class CounterContext extends BlocstarContextBase<CounterContext> {
   final int count;
   final String description;
 
   CounterContext(
-      BlocBase<BlocstarLogicBaseContextBase<CounterContext>> blocBase,
+      BlocstarLogicBase<BlocstarContextBase<CounterContext>> logic,
       {this.count,
       this.description})
-      : super(blocBase);
+      : super(logic);
 
   @override
   merge({int newCount, String newDescription}) {
-    new CounterContext(_logic,
+    new CounterContext(logic,
         count: resolveValue(count, newCount),
         description: resolveValue(description, newDescription));
   }

@@ -1,8 +1,10 @@
-import 'package:blocstar/BlocBase.dart';
+
+
+import 'package:blocstar/BlocstarLogicBase.dart';
 
 import 'CounterContext.dart';
 
-class CounterBloc extends BlocBase<CounterContext> {
+class CounterBloc extends BlocstarLogicBase<CounterContext> {
   @override
   Future initializeAsync() async {
     context =
