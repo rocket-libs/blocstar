@@ -10,7 +10,7 @@ class Counter extends StatefulWidget {
   }
 }
 
-class _CounterState extends BlocWidgetState<Counter, CounterBloc> {
+class _CounterState extends BlocStarUIBinder<Counter, CounterBloc> {
   Widget _getCenterText(String text) {
     return Center(
       child: Container(padding: EdgeInsets.all(20), child: Text(text)),

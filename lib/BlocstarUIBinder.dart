@@ -1,11 +1,10 @@
+import 'package:blocstar/BlocstarLogicBase.dart';
 import 'package:flutter/widgets.dart';
-
-import 'BlocBase.dart';
 import 'BlocProvider.dart';
 import 'ObjectFactories/BlocstarObjectsProvider.dart';
 
-abstract class BlocWidgetState<TState extends StatefulWidget,
-    TBloc extends BlocBase> extends State<TState> {
+abstract class BlocstarUIBinder<TState extends StatefulWidget,
+    TBloc extends BlocstarLogicBase> extends State<TState> {
   TBloc _privateBloc;
 
   willDispose();

@@ -1,14 +1,14 @@
-import 'package:blocstar/BlocBase.dart';
+import 'package:blocstar/BlocstarLogicBase.dart';
 import 'package:flutter/widgets.dart';
 
-class BlocProvider<T extends BlocBase> extends StatefulWidget {
+class BlocProvider<T extends BlocstarLogicBase> extends StatefulWidget {
   final Widget child;
   final T bloc;
 
   const BlocProvider({Key key, @required this.bloc, @required this.child})
       : super(key: key);
 
-  static T of<T extends BlocBase>(BuildContext context) {
+  static T of<T extends BlocstarLogicBase>(BuildContext context) {
     final type = _providerType<BlocProvider<T>>();
     final BlocProvider<T> provider = context.findAncestorWidgetOfExactType<
         BlocProvider<T>>(); //context.ancestorWidgetOfExactType(type);

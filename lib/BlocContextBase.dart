@@ -1,16 +1,20 @@
-import 'package:blocstar/BlocBase.dart';
 import 'package:blocstar/DataManagement/Mergeable.dart';
+import 'package:flutter/widgets.dart';
 
 import 'ActionState.dart';
+import 'BlocstarLogicBase.dart';
 
-abstract class BlocContextBase<TBlocContext>
-    implements Mergeable<TBlocContext> {
+abstract class BlocstarLogicBaseContextBase<TBlocStarContext>
+    implements Mergeable<TBlocStarContext> {
   ActionState actionState;
-  final BlocBase<BlocContextBase<TBlocContext>> blocBase;
+  final BlocstarLogicBase<BlocstarLogicBaseContextBase<TBlocStarContext>> _logic;
 
-  BlocContextBase(this.blocBase) {
-    actionState = this.blocBase.context?.actionState ??
-        new ActionState(false, false, null, this.blocBase);
-    blocBase.onContextChangedCallback(this);
+  BlocstarLogicBaseContextBase(this._logic) {
+    actionState = this._logic.context?.actionState ??
+        new ActionState(false, false, null, this._logic);
+    _logic.onContextChangedCallback(this);
   }
+
+  @protected
+  BlocstarLogicBase<BlocstarLogicBaseContextBase<TBlocStarContext>> get logic => _logic;
 }

@@ -1,8 +1,11 @@
-import 'package:blocstar/BlocBase.dart';
+
+
+import 'package:blocstar/BlocstarLogicBase.dart';
+import 'package:flutter/foundation.dart';
 
 import 'TestContext.dart';
 
-class TestBloc extends BlocBase<TestContext> {
+class TestBloc extends BlocstarLogicBase<TestContext> {
   @override
   Future initializeAsync() async {
     new TestContext(this, count: 0);
@@ -14,6 +17,14 @@ class TestBloc extends BlocBase<TestContext> {
     if (incrementedValue != null) {
       context.merge(newCount: incrementedValue);
     }
+  }
+
+  Future asyncSimulator<TResult>({@required int executionDelayMilliseconds, @required int timeoutSeconds, TResult result}) async{
+    return await runAsync(
+      function: () async =>
+            Future.delayed(new Duration(milliseconds: executionDelayMilliseconds), () => result),
+        timeoutSeconds: timeoutSeconds
+    );
   }
 
   Future _delayedIncrement() async {
