@@ -39,7 +39,7 @@ class _CounterState extends BlocstarUIBinder<Counter, CounterBloc> {
           displayLabel: "Simulate Exception",
           onPressed: () => logic.simulateExceptionAsync()),
       _getButton(
-          displayLabel: "Increment Count",
+          displayLabel: "Increment Count (Happy Path)",
           onPressed: () => logic.buttonPressedAsync(3))
     ];
   }
