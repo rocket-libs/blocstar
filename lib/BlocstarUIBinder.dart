@@ -7,6 +7,13 @@ abstract class BlocstarUIBinder<TState extends StatefulWidget,
     TLogic extends BlocstarLogicBase> extends State<TState> {
   TLogic _logic;
 
+  Widget Function() get rootWidget;
+
+  @override
+  Widget build(BuildContext context) {
+    return bind(fnScreenGetter: rootWidget);
+  }
+
   @Deprecated(
       "This is for backwards compatibility. Override 'dispose' instead.")
   willDispose() {}
