@@ -1,6 +1,6 @@
 name: blocstar
 description: Bloc based nano framework, that helps structure how your flutter code is laid out and written.
-version: 1.2.0-beta01
+version: 1.2.0-beta02
 homepage: https://github.com/rocket-libs/blocstar
 
 environment:
