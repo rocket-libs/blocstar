@@ -11,8 +11,7 @@ abstract class BlocstarState<TState extends StatefulWidget,
 
   @override
   Widget build(BuildContext context) {
-    return _bootstrapper(
-        fnNoData: rootWidget, fnHasData: (_) => rootWidget());
+    return _bootstrapper(fnNoData: rootWidget, fnHasData: (_) => rootWidget());
   }
 
   @override

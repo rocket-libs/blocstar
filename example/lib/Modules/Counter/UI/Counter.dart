@@ -88,7 +88,6 @@ class _CounterState extends BlocstarState<Counter, CounterBloc> {
     }
   }
 
-  
   @override
   Widget rootWidget() {
     return Scaffold(
@@ -97,6 +96,4 @@ class _CounterState extends BlocstarState<Counter, CounterBloc> {
         ),
         body: _body);
   }
-
-  
 }
