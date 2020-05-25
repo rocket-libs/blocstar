@@ -1,5 +1,3 @@
-
-
 import 'package:blocstar/BlocstarLogicBase.dart';
 import 'package:flutter/foundation.dart';
 
@@ -19,12 +17,15 @@ class DummyLogic extends BlocstarLogicBase<DummyContext> {
     }
   }
 
-  Future asyncSimulator<TResult>({@required int executionDelayMilliseconds, @required int timeoutSeconds, TResult result}) async{
+  Future asyncSimulator<TResult>(
+      {@required int executionDelayMilliseconds,
+      @required int timeoutSeconds,
+      TResult result}) async {
     return await runAsync(
-      function: () async =>
-            Future.delayed(new Duration(milliseconds: executionDelayMilliseconds), () => result),
-        timeoutSeconds: timeoutSeconds
-    );
+        function: () async => Future.delayed(
+            new Duration(milliseconds: executionDelayMilliseconds),
+            () => result),
+        timeoutSeconds: timeoutSeconds);
   }
 
   Future _delayedIncrement() async {

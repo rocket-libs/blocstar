@@ -2,8 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'DummyLogic.dart';
 
-
-
 void main() {
   test("busy state triggers ActionState", () {
     final dummyLogic = new DummyLogic()..initializeAsync();

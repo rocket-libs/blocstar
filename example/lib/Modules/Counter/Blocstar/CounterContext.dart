@@ -5,8 +5,10 @@ class CounterContext extends BlocstarLogicBaseContextBase<CounterContext> {
   final int count;
   final String description;
 
-  CounterContext(BlocBase<BlocstarLogicBaseContextBase<CounterContext>> blocBase,
-      {this.count, this.description})
+  CounterContext(
+      BlocBase<BlocstarLogicBaseContextBase<CounterContext>> blocBase,
+      {this.count,
+      this.description})
       : super(blocBase);
 
   @override

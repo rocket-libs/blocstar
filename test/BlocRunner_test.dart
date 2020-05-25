@@ -8,9 +8,7 @@ void main() {
     final dummyContext = dummyLogic.context;
 
     await dummyLogic.asyncSimulator(
-      executionDelayMilliseconds: 1100,
-      timeoutSeconds: 1
-    );
+        executionDelayMilliseconds: 1100, timeoutSeconds: 1);
 
     expect(dummyContext.actionState.lastActionTimedOut, true);
   });
@@ -20,12 +18,9 @@ void main() {
 
     test("Timeout returns null", () async {
       final dummyLogic = new DummyLogic()..initializeAsync();
-      
 
       final actualResult = await dummyLogic.asyncSimulator(
-        executionDelayMilliseconds: 1100,
-        timeoutSeconds: 1
-      );
+          executionDelayMilliseconds: 1100, timeoutSeconds: 1);
 
       expect(actualResult, null);
     });
@@ -35,10 +30,9 @@ void main() {
       final dummyContext = dummyLogic.context;
 
       final actualResult = await dummyLogic.asyncSimulator(
-        executionDelayMilliseconds: 500,
-        timeoutSeconds: 1,
-        result: successResult
-      );
+          executionDelayMilliseconds: 500,
+          timeoutSeconds: 1,
+          result: successResult);
       dummyContext.merge(newRawValue: actualResult);
       expect(dummyLogic.context.rawValue, successResult);
     });
@@ -49,10 +43,8 @@ void main() {
     final dummyContext = dummyLogic.context;
 
     await dummyLogic.asyncSimulator(
-      executionDelayMilliseconds: 900,
-      timeoutSeconds: 1
-    );
-    
+        executionDelayMilliseconds: 900, timeoutSeconds: 1);
+
     expect(dummyContext.actionState.lastActionTimedOut, false);
   });
 }

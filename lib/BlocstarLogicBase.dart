@@ -5,7 +5,8 @@ import 'package:blocstar/ActionState.dart';
 import 'package:blocstar/BlocstarContextBase.dart';
 import 'package:flutter/widgets.dart';
 
-abstract class BlocstarLogicBase<TBlocstarLogicBaseContext extends BlocstarContextBase> {
+abstract class BlocstarLogicBase<
+    TBlocstarLogicBaseContext extends BlocstarContextBase> {
   final _controller = StreamController<TBlocstarLogicBaseContext>();
   TBlocstarLogicBaseContext context;
 
@@ -51,7 +52,6 @@ abstract class BlocstarLogicBase<TBlocstarLogicBaseContext extends BlocstarConte
 
   bool get isClosed => _controller.isClosed;
 }
-
 
 class _BlocRunner {
   /// This method will return null should an exception be thrown or should it timeout.

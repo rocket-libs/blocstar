@@ -1,4 +1,3 @@
-
 import 'package:blocstar/BlocstarContextBase.dart';
 import 'package:blocstar/BlocstarLogicBase.dart';
 import 'package:blocstar/DataManagement/Mergeable.dart';
