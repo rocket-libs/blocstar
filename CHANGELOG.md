@@ -1,88 +1,91 @@
+## [1.2.0] - Changes To Make Class Names More Descriptive
+* Refactored and renamed classes for added clarity
 
-## [0.0.5] - TODO: Add release date.
-* Made onAppStateChanged mandatory in BlocModelBase
+## [1.1.0] - Efficiency & Documentation
+* Removed massively reduced boilerplate required and also enriched the documentation to allow better description of the project.
 
-## [0.0.6] - TODO: Add release date.
-* Stopped rethrowing exceptions caught in the bloc runner
+## [1.1.0-beta09] - Fixed breaking tests
+* Fixed breaking tests due to change in code
 
-## [0.0.7] - TODO: Add release date.
-* Added functionality to catch errors
+## [1.1.0-beta08] - Removed redundant call
+* Removed redundant call
 
-## [0.0.8] - TODO: Add release date.
-* Gave timeout result a higher precedence than general exceptions
+## [1.1.0-beta07] - Blocked passing of null values to BlocBase
+* Blocked passing of null values to BlocBase
 
-## [0.0.9] - Convenience.
-* Convenience method for running async directly from  bloc
+## [1.1.0-beta06] - Bugfix
+* Will this work
 
-## [0.0.11] - Refactor.
-* Renamed method 'bootstrapper' to more descriptive 'bind' in BlocWidgetState
+## [1.1.0-beta05] - Bugfix
+* Replaced code using closure as capture variable was preventing proper update
 
-## [0.0.12] - Refactor.
-* Added a working example to demonstrate how to use the code
+## [1.1.0-beta04] - Bugfix
+* Removed code that was breaking build
 
-## [0.0.13] - Refactor.
-* Added functionality for self-canceling of tasks that throw exceptions or those that timeout
+## [1.1.0-beta03] - Reduce boilerplate even further
+* No need to pass ActionState in business logic, moved its setup to context class for clearer code
 
-## [0.0.14] - Bugfix.
-* Fixed issue that was resulting in timed-out calls later returning a value when they should return null.
-
-## [0.0.15] - Bugfix.
-* Fixed issue that was resulting in timed-out calls later returning a value when they should return null (for real this time).
-
-## [0.0.16] - Bugfix.
-* Fixed issue that was resulting in timed-out calls later returning a value when they should return null (super for real this time).
-
-## [0.0.17] - Bugfix.
-* Simple refactor
-
-## [0.0.19] - Refactor.
-* Changed confusing name 'model' to 'context'
-
-## [0.1.2] - Refactor.
-* Simple refactor
-
-## [0.0.20] - Bugfix.
-* Simple refactor
-
-## [0.0.21] - Refactor.
-* Removed unnecessary cast
-
-## [0.0.22] - New Functionality.
-* Added code to assist with serialization and deserialization of models
-
-## [0.0.23] - New Functionality.
-* Fixed crash
-
-## [0.1.0] - DRYing up code.
-* Outsourced object creation to the excellent bargain_di package
-
-## [1.0.4] - Added documentation.
-* Added documentation
 
 ## [1.1.0-beta01] - Reduce boilerplate
 * Centralized functionality to broadcast changes to context in the context object itself.
 This way there is no need to manually call a method everytime context is updated.
 
-## [1.1.0-beta03] - Reduce boilerplate even further
-* No need to pass ActionState in business logic, moved its setup to context class for clearer code
+## [1.0.4] - Added documentation.
+* Added documentation
 
-## [1.1.0-beta04] - Bugfix
-* Removed code that was breaking build
+## [0.1.0] - DRYing up code.
+* Outsourced object creation to the excellent bargain_di package
 
-## [1.1.0-beta05] - Bugfix
-* Replaced code using closure as capture variable was preventing proper update
+## [0.0.23] - New Functionality.
+* Fixed crash
 
-## [1.1.0-beta06] - Bugfix
-* Will this work
+## [0.0.22] - New Functionality.
+* Added code to assist with serialization and deserialization of models
 
-## [1.1.0-beta07] - Blocked passing of null values to BlocBase
-* Blocked passing of null values to BlocBase
+## [0.0.21] - Refactor.
+* Removed unnecessary cast
 
-## [1.1.0-beta08] - Removed redundant call
-* Removed redundant call
+## [0.0.20] - Bugfix.
+* Simple refactor
 
-## [1.1.0-beta09] - Fixed breaking tests
-* Fixed breaking tests due to change in code
+## [0.1.2] - Refactor.
+* Simple refactor
 
-## [1.1.0] - Efficiency & Documentation
-* Removed massively reduced boilerplate required and also enriched the documentation to allow better description of the project.
+## [0.0.19] - Refactor.
+* Changed confusing name 'model' to 'context'
+
+## [0.0.17] - Bugfix.
+* Simple refactor
+
+## [0.0.16] - Bugfix.
+* Fixed issue that was resulting in timed-out calls later returning a value when they should return null (super for real this time).
+
+## [0.0.15] - Bugfix.
+* Fixed issue that was resulting in timed-out calls later returning a value when they should return null (for real this time).
+
+## [0.0.14] - Bugfix.
+* Fixed issue that was resulting in timed-out calls later returning a value when they should return null.
+
+## [0.0.13] - Refactor.
+* Added functionality for self-canceling of tasks that throw exceptions or those that timeout
+
+## [0.0.12] - Refactor.
+* Added a working example to demonstrate how to use the code
+
+## [0.0.11] - Refactor.
+* Renamed method 'bootstrapper' to more descriptive 'bind' in BlocWidgetState
+
+## [0.0.9] - Convenience.
+* Convenience method for running async directly from  bloc
+
+## [0.0.8] - Simple Refactor
+* Gave timeout result a higher precedence than general exceptions
+
+## [0.0.7] - Simple Refactor
+* Added functionality to catch errors
+
+## [0.0.6] - Simple Refactor
+* Stopped rethrowing exceptions caught in the bloc runner
+
+## [0.0.5] - Simple Refactor
+* Made onAppStateChanged mandatory in BlocModelBase

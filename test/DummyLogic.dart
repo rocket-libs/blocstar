@@ -3,12 +3,12 @@
 import 'package:blocstar/BlocstarLogicBase.dart';
 import 'package:flutter/foundation.dart';
 
-import 'TestContext.dart';
+import 'DummyContext.dart';
 
-class TestBloc extends BlocstarLogicBase<TestContext> {
+class DummyLogic extends BlocstarLogicBase<DummyContext> {
   @override
   Future initializeAsync() async {
-    new TestContext(this, count: 0);
+    new DummyContext(this, count: 0);
   }
 
   Future increment() async {
@@ -33,7 +33,7 @@ class TestBloc extends BlocstarLogicBase<TestContext> {
   }
 
   @override
-  onContextChangedCallback(TestContext updatedContext) {
+  onContextChangedCallback(DummyContext updatedContext) {
     if (updatedContext.lastUpdated == null) {
       updatedContext.merge();
       return;

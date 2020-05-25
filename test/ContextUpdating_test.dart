@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'TestBloc.dart';
+import 'DummyLogic.dart';
 
 void main() {
   test("Context Is Updated Correctly", () async {
-    final testBloc = new TestBloc();
-    await testBloc.initializeAsync();
-    await testBloc.increment();
-    expect(testBloc.context.count, 1);
-    expect(testBloc.initialized, true);
+    final dummyLogic = new DummyLogic();
+    await dummyLogic.initializeAsync();
+    await dummyLogic.increment();
+    expect(dummyLogic.context.count, 1);
+    expect(dummyLogic.initialized, true);
   });
 }

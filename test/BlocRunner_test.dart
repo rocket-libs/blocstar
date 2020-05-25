@@ -1,27 +1,28 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'TestBloc.dart';
+
+import 'DummyLogic.dart';
 
 void main() {
   test("Timeout fires on long delay", () async {
-    final testBloc = new TestBloc()..initializeAsync();
-    final testContext = testBloc.context;
+    final dummyLogic = new DummyLogic()..initializeAsync();
+    final dummyContext = dummyLogic.context;
 
-    await testBloc.asyncSimulator(
+    await dummyLogic.asyncSimulator(
       executionDelayMilliseconds: 1100,
       timeoutSeconds: 1
     );
 
-    expect(testContext.actionState.lastActionTimedOut, true);
+    expect(dummyContext.actionState.lastActionTimedOut, true);
   });
 
   group("Timeout vs Completion return values", () {
     final successResult = 6;
 
     test("Timeout returns null", () async {
-      final testBloc = new TestBloc()..initializeAsync();
+      final dummyLogic = new DummyLogic()..initializeAsync();
       
 
-      final actualResult = await testBloc.asyncSimulator(
+      final actualResult = await dummyLogic.asyncSimulator(
         executionDelayMilliseconds: 1100,
         timeoutSeconds: 1
       );
@@ -30,28 +31,28 @@ void main() {
     });
 
     test("Completion returns actual value", () async {
-      final testBloc = new TestBloc()..initializeAsync();
-      final testContext = testBloc.context;
+      final dummyLogic = new DummyLogic()..initializeAsync();
+      final dummyContext = dummyLogic.context;
 
-      final actualResult = await testBloc.asyncSimulator(
+      final actualResult = await dummyLogic.asyncSimulator(
         executionDelayMilliseconds: 500,
         timeoutSeconds: 1,
         result: successResult
       );
-      testContext.merge(newRawValue: actualResult);
-      expect(testBloc.context.rawValue, successResult);
+      dummyContext.merge(newRawValue: actualResult);
+      expect(dummyLogic.context.rawValue, successResult);
     });
   });
 
   test("Timeout does not fire too early", () async {
-    final testBloc = new TestBloc()..initializeAsync();
-    final testContext = testBloc.context;
+    final dummyLogic = new DummyLogic()..initializeAsync();
+    final dummyContext = dummyLogic.context;
 
-    await testBloc.asyncSimulator(
+    await dummyLogic.asyncSimulator(
       executionDelayMilliseconds: 900,
       timeoutSeconds: 1
     );
     
-    expect(testContext.actionState.lastActionTimedOut, false);
+    expect(dummyContext.actionState.lastActionTimedOut, false);
   });
 }
