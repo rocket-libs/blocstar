@@ -7,7 +7,9 @@ abstract class BlocstarUIBinder<TState extends StatefulWidget,
     TLogic extends BlocstarLogicBase> extends State<TState> {
   TLogic _logic;
 
-  willDispose();
+  @Deprecated(
+      "This is for backwards compatibility. Override 'dispose' instead.")
+  willDispose() {}
 
   @override
   dispose() {
