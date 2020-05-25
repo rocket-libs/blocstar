@@ -1,8 +1,7 @@
+import 'package:blocstar/BlocstarContextBase.dart';
 import 'package:blocstar/BlocstarLogicBase.dart';
 
-import 'BlocContextBase.dart';
-
-class ActionState<TBlocContext extends BlocstarLogicBaseContextBase> {
+class ActionState<TBlocContext extends BlocstarContextBase> {
   bool _busy = false;
   bool _lastActionTimedOut = false;
   Exception _lastActionException;

@@ -33,8 +33,8 @@ For code examples, we'll pick snippets from the example app included with Blocst
 ### Usage
 #### 1. **Blocstar Context**
 As mentioned above Blocstar applications are modular and we employ a dedicated source of truth for each module. This source of truth will contain all variables and constants that should be accessible by more than one class in the module.
-    The context is nothing more than a plain old flutter class that extends the ```BlocContextBase``` base class provided by Blocstar.
-    The ```BlocContextBase``` base class is a fairly light class that provides the following behaviour:
+    The context is nothing more than a plain old flutter class that extends the ```BlocstarContextBase``` base class provided by Blocstar.
+    The ```BlocstarContextBase``` base class is a fairly light class that provides the following behaviour:
     
 **1.** Tracking whether or not the module is busy performing an async action and allowing you to bake behaviour for both the busy and idle states (e.g automatically showing a progress indicator when busy, and your main UI when idle)
     
@@ -46,17 +46,17 @@ As mentioned above Blocstar applications are modular and we employ a dedicated s
     
 ***Example Blocstar Context***
 ```dart
-class CounterContext extends BlocContextBase<CounterContext> {
+class CounterContext extends BlocstarContextBase<CounterContext> {
   final int count;
   final String description;
 
-  CounterContext(BlocBase<BlocContextBase<CounterContext>> blocBase, {this.count, this.description}) : super(blocBase);
+  CounterContext(BlocstarContextBase<BlocstarContextBase<CounterContext>> logic, {this.count, this.description}) : super(logic);
 
   
 
   @override
   merge({int newCount, String newDescription}) {
-    new CounterContext(blocBase,
+    new CounterContext(logic,
         count: resolveValue(count, newCount),
         description: resolveValue(description, newDescription));
   }
@@ -65,22 +65,22 @@ class CounterContext extends BlocContextBase<CounterContext> {
 
 Points of note:
     
-**1.** It is just a simple class that extends Blocstar's ```BlocContextBase```.
+**1.** It is just a simple class that extends Blocstar's ```BlocstarContextBase```.
     
 **2.** You can create you own custom variables.
  
 **3.** Your custom variables should ideally be final and should be passed as named parameters in the constructor.
 
-**4.** ```BlocBase<BlocContextBase<CounterContext>> blocBase``` parameter in the constructor - this is an instance of the object that handles our business logic. Supplying it to the context like this allows Blocstar to automatically handle broadcasting of changes in context to the rest of the module.
+**4.** ```BlocstarContextBase<BlocstarContextBase<CounterContext>> logic``` parameter in the constructor - this is an instance of the object that handles our business logic. Supplying it to the context like this allows Blocstar to automatically handle broadcasting of changes in context to the rest of the module.
 
-**5.** The ```merge``` method. This is the poor man's version of JavaScript's spread. You can selectively pass either all or just some of the parameters. In the method, all you have to do is create a new instance of you context class, ensuring that when passing values to parameters, you run them through Blocstar's  ```resolveValue``` method, which figures out whether to use the already existing value for variable, or to overwrite it with a newly supplied value. Because of the ```blocBase``` object we pass in the constructor of contexts, simply creating a new instance of your class triggers a broadcast of change in context, and the rest of your module now knows to evaluate the update context, and react accordingly.
+**5.** The ```merge``` method. This is the poor man's version of JavaScript's spread. You can selectively pass either all or just some of the parameters. In the method, all you have to do is create a new instance of you context class, ensuring that when passing values to parameters, you run them through Blocstar's  ```resolveValue``` method, which figures out whether to use the already existing value for variable, or to overwrite it with a newly supplied value. Because of the ```logic``` object we pass in the constructor of contexts, simply creating a new instance of your class triggers a broadcast of change in context, and the rest of your module now knows to evaluate the update context, and react accordingly.
     
 #### 2. **Business Logic**
 The next step is to bring in your business logic. The business logic should be the only place where reading and writing of **Context** is done. Whenever the context is updated, your business logic class for the module should broadcast that a change occured, and your entire module can look a the new context and react to it.
 
 ***Example a Blocstar Business Logic Class***
 ```dart
-class CounterBloc extends BlocBase<CounterContext> {
+class CounterBloc extends BlocstarContextBase<CounterContext> {
   @override
   Future initializeAsync() async {
     context = new CounterContext(this,
@@ -114,15 +114,15 @@ class CounterBloc extends BlocBase<CounterContext> {
 
 Points of note:
     
-**1.** Your business logic class needs to extend BlocBase,
+**1.** Your business logic class needs to extend BlocstarContextBase,
     
-**2.** BlocBase is a generic class that expects a type parameter of the **Context** class to use. In this excample, we we'll use the **Context** class created previously. The base class being generic ensures type-safety, and all the goodness that comes with it such as fewer bugs, more readable code and of course, long time fan favourite, IDE auto-completion :)
+**2.** BlocstarContextBase is a generic class that expects a type parameter of the **Context** class to use. In this excample, we we'll use the **Context** class created previously. The base class being generic ensures type-safety, and all the goodness that comes with it such as fewer bugs, more readable code and of course, long time fan favourite, IDE auto-completion :)
     
 **3.** You are required to implement a ```initializeAsync``` method. In this method, you **must** as a first step initialize your **Context**. You may of course additionally do any other preparation you want.
     
 **4.** When instantiating our **Context**, the business logic class passes an instance of itself into the context, as mentioned above, this instance allows Blocstar to broadcast context changes to the rest of the module.
 
-**5.** The ```BlocBase``` base class supplies us with a object called ***context***. This is an instance of the object we create as our **Context** above. In it we'll find whatever public variables and/or methods we declared. In addition, it also contains the ```merge``` method.
+**5.** The ```BlocstarContextBase``` base class supplies us with a object called ***context***. This is an instance of the object we create as our **Context** above. In it we'll find whatever public variables and/or methods we declared. In addition, the *context* object also contains the ```merge``` method.
 
 **6.** Calls to async methods are wrapped in Blocstar's ```runAsync``` method. This method takes in two parameters; the first being the async method to call, and the second being the duration in second s before the method is deemed to have timed out. The ```runAsync``` method returns null if either a timeout or an error occurs when running the async method. 
 **Important**: on either the occurence of a timeout or an error, the context is updated with the occurence and a broadcast is sent out automatically. In the next section, we'll see how to handle these broadcasts in the UI. Lastly, the ```runAsync``` method returns the value of the async method passed into it, if it completed successfully. This value can be fed into the ```merge``` method to update the context.

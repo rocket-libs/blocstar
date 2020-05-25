@@ -1,14 +1,14 @@
 
-import 'package:blocstar/BlocContextBase.dart';
+import 'package:blocstar/BlocstarContextBase.dart';
 import 'package:blocstar/BlocstarLogicBase.dart';
 import 'package:blocstar/DataManagement/Mergeable.dart';
 
-class DummyContext extends BlocstarLogicBaseContextBase<DummyContext> {
+class DummyContext extends BlocstarContextBase<DummyContext> {
   final int count;
   final int rawValue;
   final int lastUpdated;
 
-  DummyContext(BlocstarLogicBase<BlocstarLogicBaseContextBase<DummyContext>> logic,
+  DummyContext(BlocstarLogicBase<BlocstarContextBase<DummyContext>> logic,
       {this.count, this.rawValue, this.lastUpdated})
       : super(logic);
 
