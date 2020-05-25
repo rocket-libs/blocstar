@@ -1,5 +1,5 @@
 ## 1.2.2 - Simplified Binding To UI
-* Added an abstract property 'rootWidget' to BlocstarUIBinder to simplify binding by requiring the user to only provide their root widget and Blocstar takes care of binding the logic and context to the UI.
+* Added a single abstract method called *'rootWidget'* which is now all that the developer needs to implement to bind to UI to Blocstar.
 
 ## 1.2.1 - Deprecated Method
 * Marked method 'willDispose' in BlocstarUIBinder as deprecated

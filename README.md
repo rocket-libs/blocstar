@@ -140,23 +140,16 @@ class Counter extends StatefulWidget {
   }
 }
 
-class _CounterState extends BlocWidgetState<Counter, CounterBloc> {
+class _CounterState extends BlocstarState<Counter, CounterBloc> {
     @override
-    Widget build(BuildContext context) {
-        return bind(fnScreenGetter: () => _getScreen());
+  Widget rootWidget() {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Blocstar Counter Example"),
+        ),
+        body: _body);
     }
     
-    @override
-    willDispose() {}
-    
-    Widget _getScreen() {
-        return Scaffold(
-            appBar: AppBar(
-              title: Text("Blocstar Counter Example"),
-            ),
-            body: _body);
-     }
-     
     Widget get _body {
         if (logic.initialized == false) {
           logic.initializeAsync();
@@ -180,11 +173,11 @@ Let's break it down:
 
 **1.** A StatefulWidget is required.
 
-**2.** The widget's state needs to extend ```BlocWidgetState``` which takes two type parameters. The first being of the StatefulWidget and the second being the type of the business logic class.
+**2.** The widget's state needs to extend ```BlocstarState``` which takes two type parameters. The first being of the StatefulWidget and the second being the type of the business logic class.
 
-**3.** Bind the Widget's state to the business logic via Blocstar's ```bind``` method. This we have done in the state's ```build``` method. Any method that returns a widget can be used as a parameter in the bind call. In our example we use the ```_getScreen``` method.
+**3.** Bind the Widget's state to the business logic by implementing ```BlocstarState```'s abstract method ```rootWidget```. This let's Blocstar know what widget to bind to. There are no special requirements for the widget to return; you may return any widget you please.
 
-**4.** The getter ```_body``` is where we control what our UI displays, we do this by interrogating the ```bloc``` variable (which is an instance of your business logic class) or the ```logic.context``` object (which is an instance of your context class). There are six possible states that we are interested in.
+**4.** After performing the bind in the previous step, we use the getter ```_body``` to show how we can control what our UI displays, we do this by interrogating the ```logic``` variable (which is an instance of your business logic class) or the ```logic.context``` object (which is an instance of your context class). There are six possible states that we are interested in.
 
 - ```logic.initialized == false``` - this is usually when your widget has first loaded and we need to bootstrap our module. Call ```logic.initializeAsync()``` (synchronously) then show a widget to let the use know what is happening.
 - ```logic.context.actionState.busy == true``` - this indicates that your module is busy executing an async operation (e.g an http call). You probably want to show the user a progress indication widget here.

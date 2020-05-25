@@ -1,4 +1,4 @@
-import 'package:blocstar/BlocstarUIBinder.dart';
+import 'package:blocstar/BlocstarState.dart';
 import 'package:blocstar_example/Modules/Counter/Blocstar/CounterBloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,7 +10,7 @@ class Counter extends StatefulWidget {
   }
 }
 
-class _CounterState extends BlocstarUIBinder<Counter, CounterBloc> {
+class _CounterState extends BlocstarState<Counter, CounterBloc> {
   Widget _getCenterText(String text) {
     return Center(
       child: Container(padding: EdgeInsets.all(20), child: Text(text)),
@@ -88,7 +88,9 @@ class _CounterState extends BlocstarUIBinder<Counter, CounterBloc> {
     }
   }
 
-  Widget _getScreen() {
+  
+  @override
+  Widget rootWidget() {
     return Scaffold(
         appBar: AppBar(
           title: Text("Blocstar Counter Example"),
@@ -96,11 +98,5 @@ class _CounterState extends BlocstarUIBinder<Counter, CounterBloc> {
         body: _body);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return bind(fnScreenGetter: () => _getScreen());
-  }
-
-  @override
-  willDispose() {}
+  
 }

@@ -3,24 +3,20 @@ import 'package:flutter/widgets.dart';
 import 'BlocProvider.dart';
 import 'ObjectFactories/BlocstarObjectsProvider.dart';
 
-abstract class BlocstarUIBinder<TState extends StatefulWidget,
+abstract class BlocstarState<TState extends StatefulWidget,
     TLogic extends BlocstarLogicBase> extends State<TState> {
   TLogic _logic;
 
-  Widget Function() get rootWidget;
+  Widget rootWidget();
 
   @override
   Widget build(BuildContext context) {
-    return bind(fnScreenGetter: rootWidget);
+    return _bootstrapper(
+        fnNoData: rootWidget, fnHasData: (_) => rootWidget());
   }
-
-  @Deprecated(
-      "This is for backwards compatibility. Override 'dispose' instead.")
-  willDispose() {}
 
   @override
   dispose() {
-    willDispose();
     logic.dispose();
     super.dispose();
   }
@@ -34,11 +30,6 @@ abstract class BlocstarUIBinder<TState extends StatefulWidget,
 
   TLogic _create() {
     return BlocstarObjectsProvider.objectFactory.getInstance<TLogic>();
-  }
-
-  Widget bind({@required Widget Function() fnScreenGetter}) {
-    return _bootstrapper(
-        fnNoData: fnScreenGetter, fnHasData: (_) => fnScreenGetter());
   }
 
   Widget getCurrentWidget(
