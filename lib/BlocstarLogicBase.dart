@@ -5,6 +5,8 @@ import 'package:blocstar/ActionState.dart';
 import 'package:blocstar/BlocstarContextBase.dart';
 import 'package:flutter/widgets.dart';
 
+import 'BlocstarException.dart';
+
 abstract class BlocstarLogicBase<
     TBlocstarLogicBaseContext extends BlocstarContextBase> {
   final _controller = StreamController<TBlocstarLogicBaseContext>();
@@ -83,9 +85,10 @@ class _BlocRunner {
       actionState.lastActionTimedOut = true;
       actionState.lastActionException = toe;
       return null;
-    } catch (e) {
+    } catch (otherValue) {
       cancelableCompleter.operation.cancel();
-      actionState.lastActionException = e;
+      //We can't guarantee 'otherValue' will always be an exception, so we wrap it in 'BlocstarException' to ensure we can guarantee it will be passed to caller successfully.
+      actionState.lastActionException = new BlocstarException(otherValue);
       return null;
     } finally {
       actionState.busy = false;

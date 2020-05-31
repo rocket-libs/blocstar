@@ -1,3 +1,6 @@
+## 1.2.3 - Fixed Bug That Caused Some Errors Not To Be Passed To Client.
+* Began wrapping all failure values that are non-timeout exceptions in the object 'BlocstarException' as previously, anything that didn't implement or extend 'Exception' was discarded.
+
 ## 1.2.2 - Simplified Binding To UI
 * Added a single abstract method called *'rootWidget'* which is now all that the developer needs to implement to bind to UI to Blocstar.
 
