@@ -80,7 +80,7 @@ The next step is to bring in your business logic. The business logic should be t
 
 ***Example a Blocstar Business Logic Class***
 ```dart
-class CounterBloc extends BlocstarContextBase<CounterContext> {
+class CounterBloc extends BlocstarLogicBase<CounterContext> {
   @override
   Future initializeAsync() async {
     context = new CounterContext(this,
@@ -114,9 +114,9 @@ class CounterBloc extends BlocstarContextBase<CounterContext> {
 
 Points of note:
     
-**1.** Your business logic class needs to extend BlocstarContextBase,
+**1.** Your business logic class needs to extend BlocstarLogicBase,
     
-**2.** BlocstarContextBase is a generic class that expects a type parameter of the **Context** class to use. In this excample, we we'll use the **Context** class created previously. The base class being generic ensures type-safety, and all the goodness that comes with it such as fewer bugs, more readable code and of course, long time fan favourite, IDE auto-completion :)
+**2.** BlocstarLogicBase is a generic class that expects a type parameter of the **Context** class to use. In this excample, we we'll use the **Context** class created previously. The base class being generic ensures type-safety, and all the goodness that comes with it such as fewer bugs, more readable code and of course, long time fan favourite, IDE auto-completion :)
     
 **3.** You are required to implement a ```initializeAsync``` method. In this method, you **must** as a first step initialize your **Context**. You may of course additionally do any other preparation you want.
     
