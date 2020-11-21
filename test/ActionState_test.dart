@@ -23,7 +23,7 @@ void main() {
     final dummyLogic = new DummyLogic()..initializeAsync();
     final dummyContext = dummyLogic.context;
     final theException = new Exception("Bad Stuff");
-    dummyContext.actionState.lastActionException = theException;
+    dummyContext.actionState.onError(theException, null);
     expect(dummyContext.actionState.lastActionException != null, true);
     expect(dummyLogic.context.lastUpdated > 0, true);
   });
