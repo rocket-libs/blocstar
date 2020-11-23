@@ -27,4 +27,11 @@ void main() {
     expect(dummyContext.actionState.lastActionException != null, true);
     expect(dummyLogic.context.lastUpdated > 0, true);
   });
+
+  test("stacktrace is passed when exception is thrown", () async {
+    final dummyLogic = new DummyLogic();
+    await dummyLogic.initializeAsync();
+    await dummyLogic.throwExceptionAsync();
+    expect(dummyLogic.context.actionState.lastStackTrace != null, true);
+  });
 }

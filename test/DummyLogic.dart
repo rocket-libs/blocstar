@@ -41,4 +41,8 @@ class DummyLogic extends BlocstarLogicBase<DummyContext> {
     }
     return super.onContextChangedCallback(updatedContext);
   }
+
+  Future throwExceptionAsync() async {
+    await runAsync(function: () => throw new Exception(), timeoutSeconds: 10);
+  }
 }

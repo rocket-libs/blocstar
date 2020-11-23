@@ -31,7 +31,7 @@ class ActionState<TBlocContext extends BlocstarContextBase> {
 
   onError(Exception exception, StackTrace stackTrace) {
     lastActionException = exception;
-    stackTrace = stackTrace;
+    lastStackTrace = stackTrace;
     _logic.onContextChangedCallback(_logic.context);
   }
 
