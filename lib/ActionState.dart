@@ -27,8 +27,6 @@ class ActionState<TBlocContext extends BlocstarContextBase> {
 
   bool get errorOccuredOnLastAction => lastActionException != null;
 
-  
-
   onError(Exception? exception, StackTrace? stackTrace) {
     lastActionException = exception;
     lastStackTrace = stackTrace;
@@ -38,6 +36,4 @@ class ActionState<TBlocContext extends BlocstarContextBase> {
   clearErrors() {
     onError(null, null);
   }
-
-
 }
