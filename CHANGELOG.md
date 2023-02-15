@@ -1,4 +1,4 @@
-## 1.2.6 - Migrated to Null Safety
+## 1.3.0 - Migrated to Null Safety
 
 ## 1.2.5 - Fixed Stacktrace Forwarding Issue.
 
