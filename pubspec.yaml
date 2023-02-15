@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   async: ^2.4.0
-  bargain_di: ^1.0.3
+  bargain_di: ^1.0.5
 
 dev_dependencies:
   flutter_test:

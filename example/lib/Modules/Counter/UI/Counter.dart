@@ -1,7 +1,6 @@
 import 'package:blocstar/BlocstarState.dart';
 import 'package:blocstar_example/Modules/Counter/Blocstar/CounterBloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Counter extends StatefulWidget {
   @override
@@ -23,7 +22,7 @@ class _CounterState extends BlocstarState<Counter, CounterBloc> {
         padding: EdgeInsets.only(top: 10),
         child: SizedBox(
           width: double.infinity,
-          child: RaisedButton(
+          child: ElevatedButton(
             onPressed: onPressed,
             child: Text(displayLabel),
           ),
