@@ -5,7 +5,7 @@ import 'ObjectFactories/BlocstarObjectsProvider.dart';
 
 abstract class BlocstarState<TState extends StatefulWidget,
     TLogic extends BlocstarLogicBase> extends State<TState> {
-  TLogic _logic;
+  TLogic? _logic;
 
   Widget rootWidget();
 
@@ -16,12 +16,12 @@ abstract class BlocstarState<TState extends StatefulWidget,
 
   @override
   dispose() {
-    logic.dispose();
+    logic!.dispose();
     super.dispose();
   }
 
-  TLogic get logic {
-    if (_logic == null || _logic.isClosed) {
+  TLogic? get logic {
+    if (_logic == null || _logic!.isClosed) {
       _logic = _create();
     }
     return _logic;
@@ -32,20 +32,20 @@ abstract class BlocstarState<TState extends StatefulWidget,
   }
 
   Widget getCurrentWidget(
-      {@required Widget Function() onNullContext,
-      @required Widget Function() onBusy,
-      @required Widget Function() onError,
-      @required Widget Function() onTimeOut,
-      @required Widget Function() onSuccess}) {
-    if (logic.initialized == false) {
+      {required Widget Function() onNullContext,
+      required Widget Function() onBusy,
+      required Widget Function() onError,
+      required Widget Function() onTimeOut,
+      required Widget Function() onSuccess}) {
+    if (logic!.initialized == false) {
       return onNullContext();
     } else {
-      final context = logic.context;
-      if (context.actionState.busy) {
+      final context = logic!.context!;
+      if (context.actionState!.busy) {
         return onBusy();
-      } else if (context.actionState.lastActionTimedOut) {
+      } else if (context.actionState!.lastActionTimedOut) {
         return onTimeOut();
-      } else if (context.actionState.errorOccuredOnLastAction) {
+      } else if (context.actionState!.errorOccuredOnLastAction) {
         return onError();
       } else {
         return onSuccess();
@@ -54,12 +54,12 @@ abstract class BlocstarState<TState extends StatefulWidget,
   }
 
   Widget _bootstrapper(
-      {@required Widget Function() fnNoData,
-      @required Widget Function(dynamic) fnHasData}) {
-    var widget = BlocProvider<TLogic>(
+      {required Widget Function() fnNoData,
+      required Widget Function(dynamic) fnHasData}) {
+    var widget = BlocProvider<TLogic?>(
       bloc: logic,
       child: StreamBuilder<dynamic>(
-          stream: logic.stream,
+          stream: logic!.stream,
           builder: (blocContext, snapshot) {
             if (snapshot.hasData == false) {
               return fnNoData();

@@ -8,11 +8,11 @@ import 'package:flutter/widgets.dart';
 import 'BlocstarException.dart';
 
 abstract class BlocstarLogicBase<
-    TBlocstarLogicBaseContext extends BlocstarContextBase> {
-  final _controller = StreamController<TBlocstarLogicBaseContext>();
-  TBlocstarLogicBaseContext context;
+    TBlocstarLogicBaseContext extends BlocstarContextBase?> {
+  final StreamController<TBlocstarLogicBaseContext?> _controller = StreamController<TBlocstarLogicBaseContext>();
+  TBlocstarLogicBaseContext? context;
 
-  Stream<TBlocstarLogicBaseContext> get stream => _controller.stream;
+  Stream<TBlocstarLogicBaseContext?> get stream => _controller.stream;
 
   Future initializeAsync();
 
@@ -40,11 +40,11 @@ abstract class BlocstarLogicBase<
   /// calls to 'sinkDefault'
   @protected
   Future runAsync<TResult>(
-      {@required Future<TResult> Function() function,
-      @required int timeoutSeconds}) async {
+      {required Future<TResult> Function() function,
+      required int timeoutSeconds}) async {
     return await _BlocRunner.runAsync(
         function: function,
-        actionState: context.actionState,
+        actionState: context!.actionState!,
         timeoutSeconds: timeoutSeconds);
   }
 
@@ -58,10 +58,10 @@ abstract class BlocstarLogicBase<
 class _BlocRunner {
   /// This method will return null should an exception be thrown or should it timeout.
   ///  Non-null return values are only returned on success
-  static Future<TResult> runAsync<TResult>(
-      {@required Future<TResult> Function() function,
-      @required ActionState actionState,
-      @required int timeoutSeconds}) async {
+  static Future<TResult?> runAsync<TResult>(
+      {required Future<TResult> Function() function,
+      required ActionState actionState,
+      required int timeoutSeconds}) async {
     final cancelableCompleter =
         new CancelableCompleter<TResult>(onCancel: () => null);
 

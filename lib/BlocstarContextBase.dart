@@ -6,7 +6,7 @@ import 'BlocstarLogicBase.dart';
 
 abstract class BlocstarContextBase<TBlocStarContext>
     implements Mergeable<TBlocStarContext> {
-  ActionState actionState;
+  ActionState? actionState;
   final BlocstarLogicBase<BlocstarContextBase<TBlocStarContext>> _logic;
 
   BlocstarContextBase(this._logic) {

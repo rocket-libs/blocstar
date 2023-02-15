@@ -4,9 +4,9 @@ import 'package:blocstar/BlocstarLogicBase.dart';
 class ActionState<TBlocContext extends BlocstarContextBase> {
   bool _busy = false;
   bool _lastActionTimedOut = false;
-  Exception lastActionException;
-  StackTrace lastStackTrace;
-  final BlocstarLogicBase<TBlocContext> _logic;
+  Exception? lastActionException;
+  StackTrace? lastStackTrace;
+  final BlocstarLogicBase<TBlocContext?> _logic;
 
   ActionState(this._busy, this._lastActionTimedOut, this.lastActionException,
       this._logic, this.lastStackTrace);
@@ -29,7 +29,7 @@ class ActionState<TBlocContext extends BlocstarContextBase> {
 
   
 
-  onError(Exception exception, StackTrace stackTrace) {
+  onError(Exception? exception, StackTrace? stackTrace) {
     lastActionException = exception;
     lastStackTrace = stackTrace;
     _logic.onContextChangedCallback(_logic.context);

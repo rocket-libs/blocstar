@@ -10,7 +10,7 @@ void main() {
   });
 
   test("Old Value is maintained, if New Value is null", () {
-    final newValue = null;
+    final dynamic newValue = null;
     final oldValue = 5;
     final finalValue = resolveValue(oldValue, newValue);
     expect(finalValue, oldValue);

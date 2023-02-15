@@ -23,7 +23,7 @@ class BlocModelPackager {
 
   static TBlocModel deserializeSingle<TBlocModel extends BlocModel>(
       Map<String, dynamic> map,
-      {TBlocModel instance}) {
+      {TBlocModel? instance}) {
     instance = instance ?? _getInstance<TBlocModel>();
     return instance.singleFromMap(map);
   }
