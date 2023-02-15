@@ -69,7 +69,7 @@ class _BlocRunner {
       assert(function != null && actionState != null);
       actionState.lastActionTimedOut = false;
       actionState.busy = true;
-      actionState.lastActionException = null;
+      actionState.clearErrors();
       final timedFuture = () async =>
           await function().timeout(Duration(seconds: timeoutSeconds));
       cancelableCompleter.complete(await timedFuture());
@@ -80,15 +80,15 @@ class _BlocRunner {
       } else {
         return result;
       }
-    } on TimeoutException catch (toe) {
+    } on TimeoutException catch (toe, timeoutStackTrace) {
       cancelableCompleter.operation.cancel();
       actionState.lastActionTimedOut = true;
-      actionState.lastActionException = toe;
+      actionState.onError(toe, timeoutStackTrace);
       return null;
-    } catch (otherValue) {
+    } catch (otherValue, stackTrace) {
       cancelableCompleter.operation.cancel();
       //We can't guarantee 'otherValue' will always be an exception, so we wrap it in 'BlocstarException' to ensure we can guarantee it will be passed to caller successfully.
-      actionState.lastActionException = new BlocstarException(otherValue);
+      actionState.onError(new BlocstarException(otherValue), stackTrace);
       return null;
     } finally {
       actionState.busy = false;

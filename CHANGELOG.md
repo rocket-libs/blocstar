@@ -1,3 +1,8 @@
+## 1.2.5 - Fixed Stacktrace Forwarding Issue.
+* Fixed bug preventing stacktrace from errors from bubbling up.
+* Added test to verify stacktrace is actually passed up.
+
+## 1.2.4 - Library Now Forwards All Stacktraces.
 ## 1.2.3 - Fixed Bug That Caused Some Errors Not To Be Passed To Client.
 * Began wrapping all failure values that are non-timeout exceptions in the object 'BlocstarException' as previously, anything that didn't implement or extend 'Exception' was discarded.
 
