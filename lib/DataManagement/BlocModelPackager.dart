@@ -9,16 +9,12 @@ class BlocModelPackager {
   static List<TBlocModel>
       deserializeMany<TBlocModel extends BlocModel<TBlocModel>>(
           List<dynamic> mapsList) {
-    final List<TBlocModel> list = new List<TBlocModel>();
-    if (mapsList == null) {
-      return list;
-    } else {
-      final instance = _getInstance<TBlocModel>();
-      for (var map in mapsList) {
-        list.add(deserializeSingle(map, instance: instance));
-      }
-      return list;
+    final List<TBlocModel> list = new List<TBlocModel>.empty(growable: true);
+    final instance = _getInstance<TBlocModel>();
+    for (var map in mapsList) {
+      list.add(deserializeSingle(map, instance: instance));
     }
+    return list;
   }
 
   static TBlocModel deserializeSingle<TBlocModel extends BlocModel>(
@@ -30,7 +26,7 @@ class BlocModelPackager {
 
   static List<dynamic> serializeMany<TBlocModel extends BlocModel>(
       List<TBlocModel> models) {
-    final result = new List<dynamic>();
+    final result = new List<dynamic>.empty(growable: true);
     for (TBlocModel item in models) {
       result.add(item.toJson());
     }

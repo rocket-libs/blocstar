@@ -9,7 +9,8 @@ import 'BlocstarException.dart';
 
 abstract class BlocstarLogicBase<
     TBlocstarLogicBaseContext extends BlocstarContextBase?> {
-  final StreamController<TBlocstarLogicBaseContext?> _controller = StreamController<TBlocstarLogicBaseContext>();
+  final StreamController<TBlocstarLogicBaseContext?> _controller =
+      StreamController<TBlocstarLogicBaseContext>();
   TBlocstarLogicBaseContext? context;
 
   Stream<TBlocstarLogicBaseContext?> get stream => _controller.stream;
@@ -66,7 +67,6 @@ class _BlocRunner {
         new CancelableCompleter<TResult>(onCancel: () => null);
 
     try {
-      assert(function != null && actionState != null);
       actionState.lastActionTimedOut = false;
       actionState.busy = true;
       actionState.clearErrors();

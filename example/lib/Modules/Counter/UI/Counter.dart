@@ -44,7 +44,7 @@ class _CounterState extends BlocstarState<Counter, CounterBloc> {
   }
 
   Widget get _readyWidget {
-    final columnChildren = new List<Widget>();
+    final columnChildren = new List<Widget>.empty(growable: true);
     columnChildren.add(_outputWidgets);
     columnChildren.addAll(_inputWidgets);
     return SingleChildScrollView(

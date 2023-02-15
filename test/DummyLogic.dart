@@ -1,5 +1,4 @@
 import 'package:blocstar/BlocstarLogicBase.dart';
-import 'package:flutter/foundation.dart';
 
 import 'DummyContext.dart';
 
@@ -43,6 +42,6 @@ class DummyLogic extends BlocstarLogicBase<DummyContext> {
   }
 
   Future throwExceptionAsync() async {
-    await runAsync(function: (() => throw new Exception()) as Future<_> Function(), timeoutSeconds: 10);
+    await runAsync(function: (() => throw Exception()), timeoutSeconds: 10);
   }
 }
