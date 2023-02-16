@@ -16,7 +16,7 @@ abstract class BlocstarState<TState extends StatefulWidget,
 
   @override
   dispose() {
-    logic!.dispose();
+    logic.dispose();
     super.dispose();
   }
 
@@ -37,10 +37,10 @@ abstract class BlocstarState<TState extends StatefulWidget,
       required Widget Function() onError,
       required Widget Function() onTimeOut,
       required Widget Function() onSuccess}) {
-    if (logic!.initialized == false) {
+    if (logic.initialized == false) {
       return onNullContext();
     } else {
-      final context = logic!.context!;
+      final context = logic.context!;
       if (context.actionState!.busy) {
         return onBusy();
       } else if (context.actionState!.lastActionTimedOut) {
@@ -59,7 +59,7 @@ abstract class BlocstarState<TState extends StatefulWidget,
     var widget = BlocProvider<TLogic?>(
       bloc: logic,
       child: StreamBuilder<dynamic>(
-          stream: logic!.stream,
+          stream: logic.stream,
           builder: (blocContext, snapshot) {
             if (snapshot.hasData == false) {
               return fnNoData();

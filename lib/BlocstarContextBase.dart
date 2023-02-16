@@ -10,7 +10,7 @@ abstract class BlocstarContextBase<TBlocStarContext>
   final BlocstarLogicBase<BlocstarContextBase<TBlocStarContext>> _logic;
 
   BlocstarContextBase(this._logic) {
-    actionState = this._logic.context?.actionState ??
+    actionState = this._logic.context.actionState ??
         new ActionState(false, false, null, this._logic, null);
     _logic.onContextChangedCallback(this);
   }

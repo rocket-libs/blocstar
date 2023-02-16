@@ -12,7 +12,7 @@ class DummyLogic extends BlocstarLogicBase<DummyContext> {
     final incrementedValue =
         await runAsync(function: () => _delayedIncrement(), timeoutSeconds: 1);
     if (incrementedValue != null) {
-      context!.merge(newCount: incrementedValue);
+      context.merge(newCount: incrementedValue);
     }
   }
 
@@ -28,7 +28,7 @@ class DummyLogic extends BlocstarLogicBase<DummyContext> {
   }
 
   Future _delayedIncrement() async {
-    final result = context!.count! + 1;
+    final result = context.count! + 1;
     return await Future.delayed(Duration(milliseconds: 1), () => result);
   }
 

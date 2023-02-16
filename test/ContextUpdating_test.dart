@@ -7,7 +7,7 @@ void main() {
     final dummyLogic = new DummyLogic();
     await dummyLogic.initializeAsync();
     await dummyLogic.increment();
-    expect(dummyLogic.context!.count, 1);
+    expect(dummyLogic.context.count, 1);
     expect(dummyLogic.initialized, true);
   });
 }
