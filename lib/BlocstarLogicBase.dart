@@ -44,7 +44,7 @@ abstract class BlocstarLogicBase<
   }
 
   bool get initialized {
-    return context != null;
+    return _context != null;
   }
 
   /// This method will return null should an exception be thrown or should it timeout.
