@@ -20,11 +20,11 @@ abstract class BlocstarState<TState extends StatefulWidget,
     super.dispose();
   }
 
-  TLogic? get logic {
+  TLogic get logic {
     if (_logic == null || _logic!.isClosed) {
       _logic = _create();
     }
-    return _logic;
+    return _logic!;
   }
 
   TLogic _create() {

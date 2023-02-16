@@ -11,7 +11,20 @@ abstract class BlocstarLogicBase<
     TBlocstarLogicBaseContext extends BlocstarContextBase?> {
   final StreamController<TBlocstarLogicBaseContext?> _controller =
       StreamController<TBlocstarLogicBaseContext>();
-  TBlocstarLogicBaseContext? context;
+  TBlocstarLogicBaseContext? _context;
+
+  TBlocstarLogicBaseContext get context {
+    if (_context != null) {
+      return _context!;
+    } else {
+      throw Exception(
+          "Context has not been initialized. Please ensure you do so in initializeAsync method of logic");
+    }
+  }
+
+  set context(TBlocstarLogicBaseContext value) {
+    _context = value;
+  }
 
   Stream<TBlocstarLogicBaseContext?> get stream => _controller.stream;
 
