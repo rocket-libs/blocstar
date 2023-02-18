@@ -1,3 +1,7 @@
+## 1.3.5
+
+- Fixed crash occuring during logic initialization
+
 ## 1.3.1
 
 - Fixed analysis issues
