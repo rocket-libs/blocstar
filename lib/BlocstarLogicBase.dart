@@ -13,6 +13,8 @@ abstract class BlocstarLogicBase<
       StreamController<TBlocstarLogicBaseContext>();
   TBlocstarLogicBaseContext? _context;
 
+  bool autoDispose = true;
+
   TBlocstarLogicBaseContext get context {
     if (_context != null) {
       return _context!;
@@ -63,7 +65,9 @@ abstract class BlocstarLogicBase<
   }
 
   void dispose() {
-    _controller.close();
+    if (autoDispose) {
+      _controller.close();
+    }
   }
 
   bool get isClosed => _controller.isClosed;
