@@ -6,6 +6,7 @@ import 'ObjectFactories/BlocstarObjectsProvider.dart';
 abstract class BlocstarState<TState extends StatefulWidget,
     TLogic extends BlocstarLogicBase> extends State<TState> {
   TLogic? _logic;
+  bool autoDisposeLogic = true;
 
   Widget rootWidget();
 
@@ -17,6 +18,7 @@ abstract class BlocstarState<TState extends StatefulWidget,
   @override
   dispose() {
     logic.dispose();
+    _logic = null;
     super.dispose();
   }
 

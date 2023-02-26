@@ -1,3 +1,7 @@
+## 1.3.8
+
+- Bugfix
+
 ## 1.3.6
 
 - Fixed crash occuring during logic initialization
