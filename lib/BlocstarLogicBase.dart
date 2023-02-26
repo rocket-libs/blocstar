@@ -62,6 +62,7 @@ abstract class BlocstarLogicBase<
         timeoutSeconds: timeoutSeconds);
   }
 
+  @mustCallSuper
   void dispose() {
     _controller.close();
   }
