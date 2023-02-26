@@ -1,3 +1,7 @@
+## 1.4.1
+
+- Potentially breaking change, _logic_ is now set to null on state disposal
+
 ## 1.3.8
 
 - Bugfix
